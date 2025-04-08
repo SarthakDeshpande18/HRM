@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,6 +15,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@Where(clause = "status = 'ACTIVE'") // <- Filters out INACTIVE users globally
 public class User implements UserDetails {
 
     @Id
@@ -59,6 +61,8 @@ public class User implements UserDetails {
     private String FirstName;
     private String MiddleName;
     private String LastName;
+    @Column(nullable = false)
+    private String status = "ACTIVE";
 
     public String getFirstName() {
         return FirstName;
@@ -93,21 +97,6 @@ public class User implements UserDetails {
         this.bloodGroup = bloodGroup;
     }
 
-//    public String getEducation() {
-//        return education;
-//    }
-//
-//    public void setEducation(String education) {
-//        this.education = education;
-//    }
-//
-//    public String getExperience() {
-//        return experience;
-//    }
-//
-//    public void setExperience(String experience) {
-//        this.experience = experience;
-//    }
 
     public String getTechnology() {
         return technology;
@@ -135,6 +124,7 @@ public class User implements UserDetails {
         this.password = password;
         this.username = username;
         this.mobileNo = mobileNo;
+        this.status = "ACTIVE";
     }
 
     // Getters and Setters

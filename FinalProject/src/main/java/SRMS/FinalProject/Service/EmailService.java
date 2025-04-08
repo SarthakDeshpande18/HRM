@@ -50,7 +50,7 @@ public class EmailService {
         helper.setFrom("sarthakdeshpande14@gmail.com");
 
         // Add the company logo as an inline image
-        helper.addInline("companyLogo", new File("D:\\SpringBoot\\FinalProject\\companyLogo.png")); // path to the logo image
+        helper.addInline("companyLogo", new File("D:/companyLogo.png")); // path to the logo image
 
         mailSender.send(message);
     }

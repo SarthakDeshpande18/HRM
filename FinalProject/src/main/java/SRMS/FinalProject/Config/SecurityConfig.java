@@ -42,8 +42,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll() // Public endpoints
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/auth/register","/api/auth/resend-otp","/api/auth/resend-otp").permitAll() // register is public
+                        .anyRequest().authenticated() // everything else (including /login) requires auth
                 )
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
