@@ -17,7 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Service
 public class RegistrationService {
 
@@ -28,10 +27,13 @@ public class RegistrationService {
     private RoleRepository roleRepository;
 
     @Autowired
-    private UserRoleRepository1 userRoleRepository1; // Add this line to inject UserRoleRepository
+    private UserRoleRepository1 userRoleRepository1;
 
     @Autowired
     private UserRoleRepository userRoleRepository;
+
+    @Autowired
+    private OtpService otpService;
 
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -61,16 +63,16 @@ public class RegistrationService {
             user.setPassword(passwordEncoder.encode(password));
             user.setMobileNo(String.valueOf(request.getMobile_no()));
             user.setEmailVerified(false);
-//            user.setRole(userRole);
-
 
             userRepository.save(user);
 
-            // It Combines Userid and RoleId
+            // Assign USER role
             UserRole userRoleEntry = new UserRole();
             userRoleEntry.setUser(user);
             userRoleEntry.setRole(userRole);
             userRoleRepository.save(userRoleEntry);
+
+            otpService.sendOtp(user.getEmail());
 
             return new ApiResponse<>(200, "User registered successfully. OTP sent to email.", null);
         } catch (DataAccessException ex) {
