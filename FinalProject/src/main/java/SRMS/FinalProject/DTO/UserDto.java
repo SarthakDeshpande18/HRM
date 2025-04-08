@@ -1,5 +1,5 @@
-
 package SRMS.FinalProject.DTO;
+
 
 public class UserDto {
 
@@ -8,37 +8,56 @@ public class UserDto {
     private String username;
     private String mobileNo;
     private Boolean emailVerified;
-    private String DOB;  // Keeping DOB instead of age
+    private Integer age;
     private String bloodGroup;
+    //    private String education;
+//    private String experience;
     private String technology;
+    private String DOB;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     private String firstName;
     private String middleName;
     private String lastName;
 
-    // Experience Fields
-    private String companyName;
-    private String startDate;
-    private String endDate;
-    private String message;
-
-    //Education Fields
-
     // Constructor
-    public UserDto(Long id, String email, String username, String mobileNo, Boolean emailVerified, String DOB,
-                   String bloodGroup, String technology, String firstName, String middleName, String lastName) {
+    public UserDto(Long id, String email, String username, String mobileNo,
+                   Boolean emailVerified, String bloodGroup, String DOB, String firstName, String middleName, String lastName) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.mobileNo = mobileNo;
         this.emailVerified = emailVerified;
-        this.DOB = DOB;
         this.bloodGroup = bloodGroup;
-        this.technology = technology;
+        this.DOB = DOB;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.companyName = companyName;
     }
+
 
     // Getters and setters
     public Long getId() {
@@ -81,12 +100,12 @@ public class UserDto {
         this.emailVerified = emailVerified;
     }
 
-    public String getDOB() {
-        return DOB;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setDOB(String dob) {
-        this.DOB = dob;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public String getBloodGroup() {
@@ -103,61 +122,5 @@ public class UserDto {
 
     public void setTechnology(String technology) {
         this.technology = technology;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 }

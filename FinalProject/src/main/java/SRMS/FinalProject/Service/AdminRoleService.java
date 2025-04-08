@@ -22,7 +22,7 @@ public class AdminRoleService {
     @Autowired
     private UserRoleRepository1 userRoleRepository;
 
-    public void assignRoleToUser(Long userId, Long roleId) {
+    public boolean assignRoleToUser(Long userId, Long roleId) {
         try {
             User user = adminUserRepository.findById(userId)
                     .orElseThrow(() -> new RuntimeException("User with ID " + userId + " not found"));
@@ -30,19 +30,26 @@ public class AdminRoleService {
             Role role = adminRoleRepository.findById(roleId)
                     .orElseThrow(() -> new RuntimeException("Role with ID " + roleId + " not found"));
 
-            if (userRoleRepository.existsByUserAndRole(user, role)) {
-                throw new RuntimeException("User already has this role assigned");
+            Optional<UserRole> existingUserRole = userRoleRepository.findByUserAndRole(user, role);
+
+            if (existingUserRole.isPresent()) {
+                userRoleRepository.delete(existingUserRole.get());
+                // Return false to indicate it was unassigned
+                return false;
             }
 
             UserRole userRole = new UserRole();
             userRole.setUser(user);
             userRole.setRole(role);
-
             userRoleRepository.save(userRole);
+
+            // Return true to indicate it was assigned
+            return true;
         } catch (Exception e) {
-            throw new RuntimeException("Error assigning role: " + e.getMessage(), e);
+            throw new RuntimeException("Error assigning/unassigning role: " + e.getMessage(), e);
         }
     }
+
 
     public void removeRoleFromUser(Long userId, Long roleId) {
         try {
