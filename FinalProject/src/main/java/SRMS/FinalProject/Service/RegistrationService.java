@@ -80,7 +80,7 @@ public class RegistrationService {
             return new ApiResponse<>(500, "Registration failed due to database error. Please try again later.", null);
         } catch (Exception ex) {
             System.err.println("An unexpected error occurred: " + ex.getMessage());
-            return new ApiResponse<>(500, "An unexpected error occurred during registration.", null);
+            return new ApiResponse<>(500, ex.getMessage(), null);
         }
     }
 }

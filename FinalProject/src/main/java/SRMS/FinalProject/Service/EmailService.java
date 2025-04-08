@@ -50,7 +50,7 @@ public class EmailService {
         helper.setFrom("sarthakdeshpande14@gmail.com");
 
         // Add the company logo as an inline image
-        helper.addInline("companyLogo", new File("D:/companyLogo.png")); // path to the logo image
+        helper.addInline("OtpLogo", new File("D:/HRM/FinalProject/src/main/resources/templates/logo/OtpLogo.png")); // path to the logo image
 
         mailSender.send(message);
     }
@@ -81,7 +81,7 @@ public class EmailService {
                 + "<body>"
                 + "<div style='font-family: Arial, sans-serif; color: #333;'>"
                 + "<div style='text-align: center; margin-bottom: 50px;'>"
-                + "<img src='cid:companyLogo' alt='Company Logo' style='width: 200px; margin-bottom: 50px;'/>"
+                + "<img src='cid:OtpLogo' alt='Company Logo' style='width: 200px; margin-bottom: 50px;'/>"
                 + "<h1 style='color: #4CAF50;'>Weoto Welcomes You..!</h1>"
                 + "<p style='font-size: 20px; font-weight: bold;'>To complete your registration, please use the OTP code below:</p>"
                 + "<div style='font-size: 50px; font-weight: bold; color: #FF5722; text-align: center; margin: 30px 0;'>"
