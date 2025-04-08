@@ -4,7 +4,6 @@ import SRMS.FinalProject.Repository.TechnologyRepository;
 import SRMS.FinalProject.UserEntity.Technology;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
