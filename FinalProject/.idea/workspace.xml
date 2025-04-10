@@ -5,7 +5,60 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4811b45f-f3b7-473b-8a19-e3f2a2dc40bd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/TechnologyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/TechnologyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/JobApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/JobApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/TechnologyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/TechnologyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Controller/JobApplicationController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Controller/LoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Controller/PasswordController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Controller/ProfileController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Controller/RegistrationController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Controller/RoleController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Controller/TechnologyController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Controller/UserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/DTO/ExperienceDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/DTO/LoginRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/DTO/PasswordRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/DTO/ProfileDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/DTO/RegisterRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/DTO/ResetPasswordRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/DTO/UserBasicDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/DTO/UserDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/DTO/UserFilterRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/FinalProjectApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/JWTinterceptor/JwtInterceptor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Repository/EducationRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Repository/ExperienceRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Repository/ForgotPasswordUserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Repository/InterviewRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Repository/JobApplicationRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Repository/OtpRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Repository/PasswordRepository$UserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Repository/PasswordRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Repository/RoleRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Repository/TechnologyRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Repository/UserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Repository/UserRoleRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Service/CustomUserDetailsService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Service/EmailService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Service/ForgotPasswordUserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Service/InterviewService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Service/JobApplicationService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Service/LoginService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Service/OtpService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Service/ProfileService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Service/RegistrationService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Service/RoleService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Service/TechnologyService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/Service/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/UserEntity/Education.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/UserEntity/Experience.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/UserEntity/ForgotPasswordUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/UserEntity/InterviewEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/UserEntity/JobApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/UserEntity/Otp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SRMS/FinalProject/UserEntity/Technology.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,19 +96,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.FinalProjectApplication.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/SpringBoot/FinalProject/FinalProject(Registration)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.FinalProjectApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/SpringBoot/FinalProject/FinalProject(Registration)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\HRM\FinalProject\src\main" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="SRMS.FinalProject.Config" />
     </key>
   </component>
   <component name="RunManager">
