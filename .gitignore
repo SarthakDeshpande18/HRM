@@ -14,3 +14,9 @@ FinalProject/.idea/workspace.xml
 FinalProject/.idea/workspace.xml
 /FinalProject/.idea
 /FinalProject
+# Ignore class files
+*.class
+
+# Ignore build directories
+/target/
+/build/
