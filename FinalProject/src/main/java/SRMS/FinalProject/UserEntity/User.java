@@ -57,7 +57,7 @@ public class User implements UserDetails {
     private String bloodGroup;
     //    private String education;
 //    private String experience;
-    private String technology;
+    //private String technology;
     private String FirstName;
     private String MiddleName;
     private String LastName;
@@ -98,13 +98,13 @@ public class User implements UserDetails {
     }
 
 
-    public String getTechnology() {
-        return technology;
-    }
-
-    public void setTechnology(String technology) {
-        this.technology = technology;
-    }
+//    public String getTechnology() {
+//        return technology;
+//    }
+//
+//    public void setTechnology(String technology) {
+//        this.technology = technology;
+//    }
 
 
 

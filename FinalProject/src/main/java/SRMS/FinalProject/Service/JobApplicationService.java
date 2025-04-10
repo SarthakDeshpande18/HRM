@@ -1,9 +1,11 @@
 package SRMS.FinalProject.Service;
 
-
-
+import SRMS.FinalProject.Repository.ExperienceRepository;
 import SRMS.FinalProject.Repository.JobApplicationRepository;
+import SRMS.FinalProject.Repository.UserRepository;
+import SRMS.FinalProject.UserEntity.Experience;
 import SRMS.FinalProject.UserEntity.JobApplication;
+import SRMS.FinalProject.UserEntity.User;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,24 +21,41 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+
 
 @Service
 public class JobApplicationService {
 
-    private static final String UPLOAD_DIR = "D:/SpringBoot/FinalProject/FinalProject-JobApplication-1/uploads/";
+    private static final String UPLOAD_DIR = "D:/HRM/FinalProject/src/main/resources/uploads/";
 
     private final JobApplicationRepository jobApplicationRepository;
     private final JavaMailSender mailSender;
+    private final ExperienceRepository experienceRepository; // Add the repository for Experience
+    private final UserRepository userRepository;
 
     @Autowired
-    public JobApplicationService(JobApplicationRepository jobApplicationRepository, JavaMailSender mailSender) {
+    public JobApplicationService(JobApplicationRepository jobApplicationRepository,
+                                 JavaMailSender mailSender,
+                                 ExperienceRepository experienceRepository,UserRepository userRepository) {
         this.jobApplicationRepository = jobApplicationRepository;
         this.mailSender = mailSender;
+        this.experienceRepository = experienceRepository; // Inject the ExperienceRepository
+        this.userRepository= userRepository;
     }
 
     public JobApplication submitApplication(Long userId, Long interviewerId, LocalDateTime interviewDate, MultipartFile file) {
         try {
+            // Fetch technologies from Experience table
+            String userTechnology = getUserTechnology(userId);
+            String interviewerTechnology = getInterviewerTechnology(interviewerId);
+
+            // Check if the technologies match
+            if (!userTechnology.equals(interviewerTechnology)) {
+                throw new RuntimeException("User's technology does not match interviewer's technology.");
+            }
+
             // Ensure upload directory exists
             File uploadDir = new File(UPLOAD_DIR);
             if (!uploadDir.exists()) {
@@ -58,7 +76,6 @@ public class JobApplicationService {
             application.setFilePath(filePath.toString());
             application.setInterviewDate(interviewDate);
             application.setAppliedAt(LocalDateTime.now());
-            //application.setReviewed(false);
             application.setStatus("PENDING");
 
             // Save to database
@@ -74,6 +91,18 @@ public class JobApplicationService {
         } catch (Exception e) {
             throw new RuntimeException("File upload failed: " + e.getMessage());
         }
+    }
+
+    // Fetch User's technology from Experience table
+    private String getUserTechnology(Long userId) {
+        Experience experience = experienceRepository.findByUserId(userId).orElseThrow(() -> new RuntimeException("User experience not found"));
+        return experience.getTechnology(); // Assuming "technology" is stored in the "Experience" entity
+    }
+
+    // Fetch Interviewer's technology from Experience table
+    private String getInterviewerTechnology(Long interviewerId) {
+        Experience experience = experienceRepository.findByUserId(interviewerId).orElseThrow(() -> new RuntimeException("Interviewer experience not found"));
+        return experience.getTechnology(); // Assuming "technology" is stored in the "Experience" entity
     }
 
     // Send Email Notification with Resume Attachment
@@ -123,9 +152,14 @@ public class JobApplicationService {
 
     // Fetch Interviewer's Email from Database
     public String getInterviewerEmail(Long interviewerId) {
-        // TODO: Fetch from actual DB instead of returning a placeholder
-        return "interviewer" + interviewerId + "@example.com";
+        Optional<User> interviewer = userRepository.findById(interviewerId);
+        if (interviewer.isPresent()) {
+            return interviewer.get().getEmail();
+        } else {
+            throw new RuntimeException("Interviewer not found");
+        }
     }
+
 
     // Fetch User's Email from Database
     private String getUserEmail(Long userId) {

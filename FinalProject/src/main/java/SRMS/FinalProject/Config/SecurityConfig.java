@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/register","/api/auth/resend-otp","/api/auth/resend-otp","/api/auth/login").permitAll() // register is public
+                        .requestMatchers("/api/auth/register","/api/auth/verify-otp","/api/auth/resend-otp","/api/auth/login").permitAll() // register is public
                         .anyRequest().authenticated() // everything else (including /login) requires auth
                 )
                 .authenticationProvider(authenticationProvider())

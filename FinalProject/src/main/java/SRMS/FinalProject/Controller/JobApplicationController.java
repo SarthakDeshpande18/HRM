@@ -13,62 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 import java.util.List;
 
-//
-//@RestController
-//@RequestMapping("/api/job")
-//public class JobApplicationController {
-//
-//    private final JobApplicationService service;
-//
-//    @Autowired
-//    public JobApplicationController(JobApplicationService service) {
-//        this.service = service;
-//    }
-//    @PostMapping("/submit")
-//    public ResponseEntity<ApiResponse<JobApplication>> submitApplication(
-//            @RequestParam("userId") Long userId,
-//            @RequestParam("interviewerId") Long interviewerId,
-//            @RequestParam("interviewDate") LocalDateTime interviewDate,
-//            @RequestParam("file") MultipartFile file) {
-//
-//        try {
-//            // Validate file type
-//            if (!file.getOriginalFilename().toLowerCase().endsWith(".pdf")) {
-//                return ResponseEntity.badRequest()
-//                        .body(new ApiResponse<>(400, "Only PDF files are allowed!", null));
-//            }
-//
-//            // Call service method & get saved application
-//            JobApplication savedApplication = service.submitApplication(userId, interviewerId, interviewDate, file);
-//
-//            // Debug Log: Check if data is being returned
-//            System.out.println("Returning API Response: " + savedApplication);
-//
-//            return ResponseEntity.ok(new ApiResponse<>(200, "Application submitted successfully!", savedApplication));
-//
-//        } catch (Exception e) {
-//            return ResponseEntity.internalServerError()
-//                    .body(new ApiResponse<>(500, "Error: " + e.getMessage(), null));
-//        }
-//    }
-//
-//    @GetMapping("/all")
-//    public ResponseEntity<ApiResponse<List<JobApplication>>> getAllApplications() {
-//        List<JobApplication> applications = service.getAllApplications();
-//        return ResponseEntity.ok(new ApiResponse<>(200, "Applications fetched successfully!", applications));
-//    }
-//
-//    @PutMapping("/update-status/{applicationId}")
-//    public ResponseEntity<ApiResponse<String>> updateStatus(@PathVariable Long applicationId, @RequestParam("status") String status) {
-//        try {
-//            service.updateApplicationStatus(applicationId, status);
-//            return ResponseEntity.ok(new ApiResponse<>(200, "Status updated successfully!", null));
-//        } catch (Exception e) {
-//            return ResponseEntity.internalServerError().body(new ApiResponse<>(500, "Error: " + e.getMessage(), null));
-//        }
-//    }
-//}
-//
 @RestController
 @RequestMapping("/api/job")
 public class JobApplicationController {

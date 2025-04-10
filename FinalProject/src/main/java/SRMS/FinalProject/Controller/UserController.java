@@ -53,13 +53,14 @@ public class UserController {
     }
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<UserBasicDto>> getUserById(@PathVariable Long id) {
+    @PostMapping("/getById")
+    public ResponseEntity<ApiResponse<UserBasicDto>> getUserById(@RequestBody UserDto dto) {
+        Long id = dto.getId();
         User user = userService.getUserById(id);
 
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ApiResponse<>(404, "User not found", null));
+                    .body(new ApiResponse<>(404, "User with id "+ id + " not found", null));
         }
 
         UserBasicDto userDto = new UserBasicDto(

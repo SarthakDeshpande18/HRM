@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 import java.time.format.DateTimeFormatter;
+
+
 @Service
 public class ProfileService {
 
@@ -28,7 +30,6 @@ public class ProfileService {
     @Autowired
     private ExperienceRepository experienceRepository;
 
-
     private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public ApiResponse<String> addProfileFields(Long id, ProfileDTO profileDTO) {
@@ -36,14 +37,13 @@ public class ProfileService {
             User user = userRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("User not found with Id " + id));
 
-            // user
-            user.setTechnology(profileDTO.getTechnology());
+            // Update user fields (excluding technology)
             user.setBloodGroup(profileDTO.getBloodGroup());
             user.setFirstName(profileDTO.getFirstName());
             user.setMiddleName(profileDTO.getMiddleName());
             user.setLastName(profileDTO.getLastName());
 
-            // Convert DOB format if not null
+            // Convert and set DOB
             if (profileDTO.getDOB() != null && !profileDTO.getDOB().isEmpty()) {
                 LocalDate dob = LocalDate.parse(profileDTO.getDOB(), INPUT_FORMATTER);
                 user.setDOB(dob.format(INPUT_FORMATTER)); // Store as dd-MM-yyyy
@@ -51,29 +51,28 @@ public class ProfileService {
 
             userRepository.save(user);
 
-            // Education
+            // Save Education info
             Education education = new Education();
             education.setUser(user);
             education.setCourse_name(profileDTO.getCourseName());
             education.setInstitute_name(profileDTO.getInstituteName());
             educationRepository.save(education);
 
-            //Experience
+            // Save Experience info
             Experience experience = new Experience();
             experience.setUser(user);
-            experience.setCompanyName(profileDTO.getCompanyName());
             experience.setMessage(profileDTO.getMessage());
             experience.setTechnology(profileDTO.getTechnology());
+            experience.setCompanyName(profileDTO.getCompanyName());
 
-            // Convert StartDate and EndDate format if not null
             if (profileDTO.getStartDate() != null && !profileDTO.getStartDate().isEmpty()) {
                 LocalDate startDate = LocalDate.parse(profileDTO.getStartDate(), INPUT_FORMATTER);
-                experience.setStartDate(startDate.format(INPUT_FORMATTER)); // Store as dd-MM-yyyy
+                experience.setStartDate(startDate.format(INPUT_FORMATTER));
             }
 
             if (profileDTO.getEndDate() != null && !profileDTO.getEndDate().isEmpty()) {
                 LocalDate endDate = LocalDate.parse(profileDTO.getEndDate(), INPUT_FORMATTER);
-                experience.setEndDate(endDate.format(INPUT_FORMATTER)); // Store as dd-MM-yyyy
+                experience.setEndDate(endDate.format(INPUT_FORMATTER));
             }
 
             experienceRepository.save(experience);
