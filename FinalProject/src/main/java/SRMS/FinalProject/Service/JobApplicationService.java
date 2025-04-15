@@ -96,13 +96,13 @@ public class JobApplicationService {
     // Fetch User's technology from Experience table
     private String getUserTechnology(Long userId) {
         Experience experience = experienceRepository.findByUserId(userId).orElseThrow(() -> new RuntimeException("User experience not found"));
-        return experience.getTechnology(); // Assuming "technology" is stored in the "Experience" entity
+        return experience.getTechnology().getTechName();
     }
 
     // Fetch Interviewer's technology from Experience table
     private String getInterviewerTechnology(Long interviewerId) {
         Experience experience = experienceRepository.findByUserId(interviewerId).orElseThrow(() -> new RuntimeException("Interviewer experience not found"));
-        return experience.getTechnology(); // Assuming "technology" is stored in the "Experience" entity
+        return experience.getTechnology().getTechName();
     }
 
     // Send Email Notification with Resume Attachment

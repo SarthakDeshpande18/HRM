@@ -1,6 +1,9 @@
 package SRMS.FinalProject.JwtFilter;
 
+import SRMS.FinalProject.DTO.ApiResponse;
 import SRMS.FinalProject.JwtUtil.JwtUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,16 +16,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
 
-
     public JwtFilter(JwtUtil jwtUtil, UserDetailsService userDetailsService) {
-
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
     }
@@ -30,26 +30,52 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        // JWT validation logic
 
         String authHeader = request.getHeader("Authorization");
 
-        if (authHeader == null || !authHeader.startsWith("Bearer")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
 
         String token = authHeader.substring(7);
-        String userEmail = jwtUtil.extractEmail(token);
 
-        if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UsernamePasswordAuthenticationToken authToken =
-                    new UsernamePasswordAuthenticationToken(userEmail, null, null);
+        try {
+            String userEmail = jwtUtil.extractEmail(token);
 
-            authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-            SecurityContextHolder.getContext().setAuthentication(authToken);
+            if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null
+                    && jwtUtil.validateToken(token, userEmail)) {
+
+                UsernamePasswordAuthenticationToken authToken =
+                        new UsernamePasswordAuthenticationToken(userEmail, null, null);
+
+                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authToken);
+            }
+
+        } catch (ExpiredJwtException e) {
+            System.out.println("Token expired: " + e.getMessage());
+            setErrorResponse(response, 401, "Token expired");
+            return;
+        } catch (Exception e) {
+            System.out.println("Invalid Token: " + e.getMessage());
+            setErrorResponse(response, 401, "Token invalid");
+            return;
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    private void setErrorResponse(HttpServletResponse response, int status, String message) throws IOException {
+        response.setStatus(status);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        ApiResponse<Object> apiResponse = new ApiResponse<>(status, message, null);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(apiResponse);
+
+        response.getWriter().write(json);
     }
 }

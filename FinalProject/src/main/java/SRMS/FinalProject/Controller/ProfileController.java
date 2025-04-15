@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("/api/profile")
 public class ProfileController {
@@ -18,7 +19,6 @@ public class ProfileController {
     public ResponseEntity<ApiResponse<String>> addProfileFields(
             @PathVariable Long id,
             @RequestBody(required = false) ProfileDTO profileDTO) {
-
 
         if (profileDTO == null) {
             ApiResponse<String> response = new ApiResponse<>(400, "Profile data is required", null);

@@ -40,7 +40,4 @@ public class Technology
         this.tech_id = tech_id;
     }
 
-
-
-
 }

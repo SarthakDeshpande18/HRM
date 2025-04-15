@@ -4,12 +4,8 @@ package SRMS.FinalProject.Service;
 
 import SRMS.FinalProject.DTO.ApiResponse;
 import SRMS.FinalProject.DTO.ProfileDTO;
-import SRMS.FinalProject.Repository.EducationRepository;
-import SRMS.FinalProject.Repository.ExperienceRepository;
-import SRMS.FinalProject.Repository.UserRepository;
-import SRMS.FinalProject.UserEntity.Education;
-import SRMS.FinalProject.UserEntity.Experience;
-import SRMS.FinalProject.UserEntity.User;
+import SRMS.FinalProject.Repository.*;
+import SRMS.FinalProject.UserEntity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -30,6 +26,12 @@ public class ProfileService {
     @Autowired
     private ExperienceRepository experienceRepository;
 
+    @Autowired
+    private TechnologyRepository technologyRepository;
+
+    @Autowired
+    private UserTechnologyRepository userTechnologyRepository;
+
     private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public ApiResponse<String> addProfileFields(Long id, ProfileDTO profileDTO) {
@@ -37,19 +39,32 @@ public class ProfileService {
             User user = userRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("User not found with Id " + id));
 
-            // Update user fields (excluding technology)
+
             user.setBloodGroup(profileDTO.getBloodGroup());
             user.setFirstName(profileDTO.getFirstName());
             user.setMiddleName(profileDTO.getMiddleName());
             user.setLastName(profileDTO.getLastName());
 
-            // Convert and set DOB
+
             if (profileDTO.getDOB() != null && !profileDTO.getDOB().isEmpty()) {
                 LocalDate dob = LocalDate.parse(profileDTO.getDOB(), INPUT_FORMATTER);
                 user.setDOB(dob.format(INPUT_FORMATTER)); // Store as dd-MM-yyyy
             }
 
-            userRepository.save(user);
+
+            if (profileDTO.getTechId() != null) {
+                Technology technology = technologyRepository.findById(profileDTO.getTechId())
+                        .orElseThrow(() -> new RuntimeException("Technology not found with Id " + profileDTO.getTechId()));
+
+                // Check if the UserTechnology link already exists to avoid duplicates
+                boolean exists = userTechnologyRepository.existsByUserAndTechnology(user, technology);
+                if (!exists) {
+                    UserTechnology userTechnology = new UserTechnology(user, technology);
+                    userTechnologyRepository.save(userTechnology);
+                }
+            }
+
+            userRepository.save(user); // Save updated user
 
             // Save Education info
             Education education = new Education();
@@ -62,9 +77,16 @@ public class ProfileService {
             Experience experience = new Experience();
             experience.setUser(user);
             experience.setMessage(profileDTO.getMessage());
-            experience.setTechnology(profileDTO.getTechnology());
             experience.setCompanyName(profileDTO.getCompanyName());
 
+            // Set the technology for the experience
+            if (profileDTO.getTechId() != null) {
+                Technology technology = technologyRepository.findById(profileDTO.getTechId())
+                        .orElseThrow(() -> new RuntimeException("Technology not found with Id " + profileDTO.getTechId()));
+                experience.setTechnology(technology);
+            }
+
+            // Set start and end dates
             if (profileDTO.getStartDate() != null && !profileDTO.getStartDate().isEmpty()) {
                 LocalDate startDate = LocalDate.parse(profileDTO.getStartDate(), INPUT_FORMATTER);
                 experience.setStartDate(startDate.format(INPUT_FORMATTER));
@@ -75,7 +97,7 @@ public class ProfileService {
                 experience.setEndDate(endDate.format(INPUT_FORMATTER));
             }
 
-            experienceRepository.save(experience);
+            experienceRepository.save(experience); // Save experience
 
             return new ApiResponse<>(200, "Profile fields stored successfully!", null);
 

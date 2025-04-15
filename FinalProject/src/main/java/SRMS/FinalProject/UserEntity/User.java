@@ -177,4 +177,16 @@ public class User implements UserDetails {
 
     public String getRoles() { return roles.toString(); }
     public void setRoles(Set<Role> roles) { this.roles = roles; }
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<UserTechnology> technologies = new HashSet<>();
+
+    public Set<UserTechnology> getTechnologies() {
+        return technologies;
+    }
+
+    public void setTechnologies(Set<UserTechnology> technologies) {
+        this.technologies = technologies;
+    }
+
 }

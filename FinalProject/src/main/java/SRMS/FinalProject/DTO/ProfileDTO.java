@@ -3,6 +3,9 @@ package SRMS.FinalProject.DTO;
 
 public class ProfileDTO {
 
+
+
+    private Long techId;
     private String technology;
     private String DOB;  // Changed from LocalDate to String for consistency
     private String bloodGroup;
@@ -114,4 +117,13 @@ public class ProfileDTO {
     public void setDOB(String DOB) {
         this.DOB = DOB;
     }
+
+    public Long getTechId() {
+        return techId;
+    }
+
+    public void setTechId(Long techId) {
+        this.techId = techId;
+    }
+
 }

@@ -24,17 +24,23 @@ public class JwtInterceptor implements HandlerInterceptor {
         }
 
         String token = authorizationHeader.substring(7); // Extract token
+try {
+    // Extract email from token
+    String email = jwtUtil.extractEmail(token);
 
-        // Extract email from token
-        String email = jwtUtil.extractEmail(token);
-
-        // Validate token with extracted email
-        if (!jwtUtil.validateToken(token, email)) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Invalid JWT Token");
-            return false;
-        }
-
+    // Validate token with extracted email
+    if (!jwtUtil.validateToken(token, email)) {
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getWriter().write("Invalid JWT Token");
+        return false;
+    }
+}catch(Exception e)
+{
+    // Catch expired or malformed token exceptions
+    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+    response.getWriter().write("Invalid or expired JWT Token");
+    return false;
+}
         return true;
     }
 }

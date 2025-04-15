@@ -22,8 +22,9 @@ public class Experience {
     @Column(nullable = false)
     private String companyName;
 
-    @Column(nullable = false)
-    private String technology;
+    @ManyToOne
+    @JoinColumn(name = "technology_id", nullable = false) // FK to technology table
+    private Technology technology;
 
     @Column(nullable = false)
     private String startDate;
@@ -33,5 +34,4 @@ public class Experience {
 
     @Column(columnDefinition = "TEXT")
     private String message;
-
 }

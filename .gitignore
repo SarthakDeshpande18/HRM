@@ -20,3 +20,4 @@ FinalProject/.idea/workspace.xml
 # Ignore build directories
 /target/
 /build/
+.idea/workspace.xml
