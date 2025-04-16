@@ -4,6 +4,7 @@ import SRMS.FinalProject.DTO.ApiResponse;
 import SRMS.FinalProject.Service.JobOpeningService;
 import SRMS.FinalProject.UserEntity.JobOpenings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,13 @@ public class JobOpeningController {
     @PostMapping
     public ResponseEntity<ApiResponse<JobOpenings>> createJobOpening(@RequestBody JobOpenings jobOpening) {
         JobOpenings savedJob = jobOpeningsService.addJobOpening(jobOpening);
+        if (savedJob == null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(new ApiResponse<>(409, "Job opening already exists", null));
+        }
         return ResponseEntity.ok(new ApiResponse<>(200, "Job opening created successfully", savedJob));
     }
+
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<JobOpenings>>> getAllJobOpenings() {

@@ -4,6 +4,7 @@ import SRMS.FinalProject.DTO.ApiResponse;
 import SRMS.FinalProject.Service.TechnologyService;
 import SRMS.FinalProject.UserEntity.Technology;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,13 @@ public class TechnologyController {
     @PostMapping
     public ResponseEntity<ApiResponse<Technology>> createTechnology(@RequestBody Technology technology) {
         Technology savedTech = technologyService.addTechnology(technology);
+        if (savedTech == null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(new ApiResponse<>(409, "Technology already exists", null));
+        }
         return ResponseEntity.ok(new ApiResponse<>(200, "Technology created successfully", savedTech));
     }
+
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<Technology>>> getAllTechnologies() {

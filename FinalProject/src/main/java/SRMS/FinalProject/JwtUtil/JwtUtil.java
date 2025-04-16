@@ -15,7 +15,7 @@ public class JwtUtil {
     // Generate a strong secret key
     private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    private static final long EXPIRATION_TIME = 1000 * 60 * 2;// * 2; // 24 hours
+    private static final long EXPIRATION_TIME = 1000 * 60 * 2 * 10; // 10 hours
 
     public String generateToken(String email) {
         return Jwts.builder()

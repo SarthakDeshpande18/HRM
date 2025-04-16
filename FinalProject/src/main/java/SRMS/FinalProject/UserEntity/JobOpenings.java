@@ -10,13 +10,22 @@ public class JobOpenings {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "jobDescription", unique = true, nullable = false)
+    @Column(name = "jobDescription", nullable = false)
     private String jobDescription;
 
-    @Column(name = "Year_Of_Experience", nullable = false)
-    private String Year_Of_Experience;
 
-    @Column(name = "JobType", unique = true, nullable = false)
+    public int getYearOfExperience() {
+        return yearOfExperience;
+    }
+
+    public void setYearOfExperience(int yearOfExperience) {
+        this.yearOfExperience = yearOfExperience;
+    }
+
+    @Column(name = "Year_Of_Experience", nullable = false)
+    private int yearOfExperience;
+
+    @Column(name = "JobType", nullable = false)
     private String jobType;
 
 
@@ -36,13 +45,8 @@ public class JobOpenings {
         this.jobDescription = jobDescription;
     }
 
-    public String getYear_Of_Experience() {
-        return Year_Of_Experience;
-    }
 
-    public void setYear_Of_Experience(String year_Of_Experience) {
-        this.Year_Of_Experience = year_Of_Experience;
-    }
+
 
     public String getJobType() {
         return jobType;

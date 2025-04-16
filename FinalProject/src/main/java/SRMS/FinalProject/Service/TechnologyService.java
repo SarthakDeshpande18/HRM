@@ -17,7 +17,7 @@ public class TechnologyService {
             boolean exists = technologyRepository.existsByTechName(technology.getTechName());
 
             if (exists) {
-                throw new RuntimeException("Technology already exists");
+                return null;  // Indicate duplicate entry
             }
 
             return technologyRepository.save(technology);

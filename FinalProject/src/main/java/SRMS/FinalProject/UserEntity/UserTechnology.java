@@ -15,7 +15,7 @@ public class UserTechnology {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "techId", nullable = false)
+    @JoinColumn(name = "technology_id", nullable = false)
     private Technology technology;
 
     // Constructors
