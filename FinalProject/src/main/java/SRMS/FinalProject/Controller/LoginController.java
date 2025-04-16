@@ -26,7 +26,7 @@ public class LoginController {
     private final OtpService otpService;
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
-
+//
     @Autowired
     public LoginController(LoginService authService, OtpService otpService, UserRepository userRepository, JwtUtil jwtUtil) {
         this.authService = authService;

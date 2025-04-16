@@ -105,7 +105,7 @@ public class User implements UserDetails {
 //    public void setTechnology(String technology) {
 //        this.technology = technology;
 //    }
-
+//
 
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
