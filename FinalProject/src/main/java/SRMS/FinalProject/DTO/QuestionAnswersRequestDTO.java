@@ -9,7 +9,7 @@ import java.util.List;
 public class QuestionAnswersRequestDTO {
     private String filter; // "getAll", "getById", "add", "deleteById", "updateById", "getByTechnology"
     private Long id;
-    private String technology;
     private List<QuestionAnswersEntity> questions;
-    private QuestionAnswersEntity question;
+//    private QuestionAnswersEntity question;
+    private List<String>technologies;
 }

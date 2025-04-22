@@ -6,6 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="57879ddd-a50a-4cee-bf6d-57a8043f9754" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalProject/src/main/java/SRMS/FinalProject/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProject/src/main/java/SRMS/FinalProject/Controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalProject/src/main/java/SRMS/FinalProject/Controller/QuestionsAnswersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProject/src/main/java/SRMS/FinalProject/Controller/QuestionsAnswersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalProject/src/main/java/SRMS/FinalProject/DTO/QuestionAnswersRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProject/src/main/java/SRMS/FinalProject/DTO/QuestionAnswersRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalProject/src/main/java/SRMS/FinalProject/JwtUtil/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProject/src/main/java/SRMS/FinalProject/JwtUtil/JwtUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalProject/src/main/java/SRMS/FinalProject/Repository/QuestionAnswerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProject/src/main/java/SRMS/FinalProject/Repository/QuestionAnswerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalProject/src/main/java/SRMS/FinalProject/Service/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProject/src/main/java/SRMS/FinalProject/Service/LoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalProject/src/main/java/SRMS/FinalProject/Service/QuestionAnswerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProject/src/main/java/SRMS/FinalProject/Service/QuestionAnswerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalProject/src/main/java/SRMS/FinalProject/UserEntity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProject/src/main/java/SRMS/FinalProject/UserEntity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalProject/target/classes/SRMS/FinalProject/JwtUtil/JwtUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProject/target/classes/SRMS/FinalProject/JwtUtil/JwtUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalProject/target/classes/SRMS/FinalProject/UserEntity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProject/target/classes/SRMS/FinalProject/UserEntity/User.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,25 +53,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;Application.FinalProjectApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FinalProject [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FinalProject [deploy].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FinalProject [install].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/HRM/FinalProject&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2792453&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "Application.FinalProjectApplication.executor": "Run",
+    "Maven.FinalProject [clean].executor": "Run",
+    "Maven.FinalProject [deploy].executor": "Run",
+    "Maven.FinalProject [install].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/HRM",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2792453",
+    "settings.editor.selected.configurable": "advanced.settings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="SRMS.FinalProject.Service" />

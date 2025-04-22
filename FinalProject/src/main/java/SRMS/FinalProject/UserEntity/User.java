@@ -108,13 +108,21 @@ public class User implements UserDetails {
 //
 
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role> roles;
 
     // Constructors
     public User() {}
@@ -175,8 +183,6 @@ public class User implements UserDetails {
         return emailVerified;
     }
 
-    public String getRoles() { return roles.toString(); }
-    public void setRoles(Set<Role> roles) { this.roles = roles; }
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserTechnology> technologies = new HashSet<>();

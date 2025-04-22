@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface QuestionAnswerRepository extends JpaRepository<QuestionAnswersEntity, Long> {
     List<QuestionAnswersEntity> findByTechnology(String technology);
+    List<QuestionAnswersEntity> findByTechnologyIn(List<String> technologies);
+
 }
