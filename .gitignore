@@ -1,23 +1,26 @@
+# Ignore all .iml files (IDE project files)
 *.iml
+
+# Ignore JSON and XML files for IDE/project-specific configurations (if not needed in version control)
 *.json
 *.xml
-*.xml
-*.xml
-FinalProject/.idea/workspace.xml
-.idea/workspace.xml
-FinalProject/.idea/workspace.xml
-.idea/workspace.xml
-FinalProject/.idea/workspace.xml
-.idea/workspace.xml
-*.xml
-.idea/workspace.xml
-FinalProject/.idea/workspace.xml
-/FinalProject/.idea
-/FinalProject
-# Ignore class files
-*.class
 
-# Ignore build directories
+# Ignore all IDE-specific directories and files (IntelliJ IDEA, Visual Studio Code, etc.)
+.idea/
+.vscode/
+
+# Ignore workspace files (these are usually user-specific settings and should not be versioned)
+.idea/workspace.xml
+.idea/*.iml
+
+# Ignore Maven/Gradle build output directories
 /target/
 /build/
-.idea/workspace.xml
+
+# Ignore .class files (compiled Java files)
+*.class
+
+# Optionally ignore the entire project directory if it's part of your IDE-specific folder structure (e.g. FinalProject)
+# If you have a directory structure like "FinalProject/.idea", you can ignore the entire "FinalProject" directory, or the .idea folder inside it
+FinalProject/.idea/
+FinalProject/
