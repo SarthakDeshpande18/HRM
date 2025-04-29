@@ -3,8 +3,6 @@
 
 # Ignore JSON and XML files for IDE/project-specific configurations (if not needed in version control)
 *.json
-*.xml
-
 # Ignore all IDE-specific directories and files (IntelliJ IDEA, Visual Studio Code, etc.)
 .idea/
 .vscode/
