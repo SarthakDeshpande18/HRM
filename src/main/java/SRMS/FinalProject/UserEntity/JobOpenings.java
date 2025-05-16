@@ -14,19 +14,21 @@ public class JobOpenings {
     private String jobDescription;
 
 
-    public int getYearOfExperience() {
+    public String getYearOfExperience() {
         return yearOfExperience;
     }
 
-    public void setYearOfExperience(int yearOfExperience) {
+    public void setYearOfExperience(String yearOfExperience) {
         this.yearOfExperience = yearOfExperience;
     }
 
     @Column(name = "Year_Of_Experience", nullable = false)
-    private int yearOfExperience;
+    private String yearOfExperience;
 
     @Column(name = "JobType", nullable = false)
     private String jobType;
+
+
 
 
     public Long getId() {

@@ -4,8 +4,43 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4811b45f-f3b7-473b-8a19-e3f2a2dc40bd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="6ee4e163-05dd-4003-b468-fef6e1ad4b42" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Config/CorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/AdminRoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/AdminRoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/JobApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/JobApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/JobOpeningController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/JobOpeningController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/RoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/DTO/ExperienceDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/DTO/ExperienceDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/DTO/ProfileDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/DTO/ProfileDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/DTO/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/DTO/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/JWTinterceptor/JwtInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/JWTinterceptor/JwtInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/JwtFilter/JwtFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/JwtUtil/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/JwtUtil/JwtUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/ExperienceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/ExperienceRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/JobOpeningRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/JobOpeningRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/RoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/UserRoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/UserRoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/UserRoleRepository1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/UserRoleRepository1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/UserTechnologyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/UserTechnologyRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/AdminRoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/AdminRoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/CustomUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/CustomUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/JobApplicationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/JobApplicationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/JobOpeningService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/JobOpeningService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/ProfileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/ProfileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/Education.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/Education.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/Experience.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/Experience.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/JobOpenings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/JobOpenings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/UserTechnology.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/UserTechnology.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +50,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -36,34 +70,27 @@
   }
 }</component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
 }</component>
-  <component name="ProjectId" id="2vR9492CMWmd3ry4L3c1l85QBW0" />
+  <component name="ProjectId" id="2wiVw14dARNxLvipdAY25VEtiZQ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.FinalProjectApplication.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/HRM",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.FinalProjectApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\HRM\FinalProject\src\main" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="SRMS.FinalProject.Config" />
-    </key>
-  </component>
+}</component>
   <component name="RunManager">
     <configuration name="FinalProjectApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="SRMS.FinalProject.FinalProjectApplication" />
@@ -78,6 +105,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="HRM" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="HRM" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.FinalProjectApplication" />
@@ -87,11 +125,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4811b45f-f3b7-473b-8a19-e3f2a2dc40bd" name="Changes" comment="" />
-      <created>1744096827957</created>
+      <changelist id="6ee4e163-05dd-4003-b468-fef6e1ad4b42" name="Changes" comment="" />
+      <created>1746524617767</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1744096827957</updated>
+      <updated>1746524617767</updated>
     </task>
     <servers />
   </component>

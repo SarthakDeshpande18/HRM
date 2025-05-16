@@ -10,27 +10,38 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Map;
 
 @RestController
+//@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/api/job-openings")
 public class JobOpeningController {
 
     @Autowired
     private JobOpeningService jobOpeningsService;
 
+
     @PostMapping
     public ResponseEntity<ApiResponse<JobOpenings>> createJobOpening(@RequestBody JobOpenings jobOpening) {
-        JobOpenings savedJob = jobOpeningsService.addJobOpening(jobOpening);
-        if (savedJob == null) {
+        try {
+            JobOpenings savedJob = jobOpeningsService.addJobOpening(jobOpening);
+            return ResponseEntity.ok(new ApiResponse<>(200, "Job opening created successfully", savedJob));
+        } catch (ResponseStatusException ex) {
+            // Catch the 409 conflict and return a structured JSON response
             return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body(new ApiResponse<>(409, "Job opening already exists", null));
+                    .body(new ApiResponse<>(409, ex.getReason(), null));
+        } catch (Exception ex) {
+            // Handle any other unexpected exceptions
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse<>(500, "An unexpected error occurred", null));
         }
-        return ResponseEntity.ok(new ApiResponse<>(200, "Job opening created successfully", savedJob));
     }
+
 
     @GetMapping("/all")
     public ResponseEntity<ApiResponse<Page<JobOpenings>>> getAllJobOpenings(
@@ -41,6 +52,7 @@ public class JobOpeningController {
         return ResponseEntity.ok(new ApiResponse<>(200, "Fetched all job openings", jobList));
     }
 
+
     @PostMapping("/getById")
     public ResponseEntity<ApiResponse<JobOpenings>> getJobOpeningById(@RequestBody Map<String, Long> payload) {
         Long id = payload.get("id");
@@ -48,6 +60,7 @@ public class JobOpeningController {
                 .map(job -> ResponseEntity.ok(new ApiResponse<>(200, "Successful", job)))
                 .orElse(ResponseEntity.status(404).body(new ApiResponse<>(404, "Job Opening ID " + id + " not found", null)));
     }
+
 
     @PostMapping("/update")
     public ResponseEntity<ApiResponse<JobOpenings>> updateJobOpening(@RequestBody JobOpenings jobOpening) {
@@ -59,6 +72,7 @@ public class JobOpeningController {
             return ResponseEntity.status(404).body(new ApiResponse<>(404, "Job Opening ID " + id + " not found", null));
         }
     }
+
 
     @PostMapping("/delete")
     public ResponseEntity<ApiResponse<Void>> deleteJobOpening(@RequestBody Map<String, Long> payload) {

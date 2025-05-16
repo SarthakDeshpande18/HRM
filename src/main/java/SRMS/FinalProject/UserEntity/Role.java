@@ -44,6 +44,7 @@ import java.util.Set;
 //    public Set<User> getUsers() { return users; }
 //    public void setUsers(Set<User> users) { this.users = users; }
 //}
+
 @Entity
 @Table(name = "roles")
 public class Role {

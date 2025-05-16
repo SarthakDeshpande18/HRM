@@ -113,7 +113,8 @@ public class UserService {
                 user.getEmailVerified(),
                 user.getBloodGroup(),
                 roleNames,
-                techNames
+                techNames,
+                user.getStatus() // ✅ Add this
         );
     }
 }

@@ -1,5 +1,6 @@
 package SRMS.FinalProject.UserEntity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -8,11 +9,12 @@ import jakarta.validation.constraints.Pattern;
 import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 //
 //@Entity
 //@Table(name = "users")
@@ -231,11 +233,19 @@ public class User implements UserDetails {
 
     private boolean emailVerified = false;
 
-    private String DOB;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate DOB;
     private String bloodGroup;
     private String firstName;
     private String middleName;
     private String lastName;
+
+    @Column(name = "profile_picture")
+    private String profilePicture;
+
+    public String getStatus() {
+        return status;
+    }
 
     @Column(nullable = false)
     private String status = "ACTIVE";
@@ -285,6 +295,13 @@ public class User implements UserDetails {
     public boolean isEmailVerified() { return emailVerified; }
     public void setEmailVerified(boolean emailVerified) { this.emailVerified = emailVerified; }
 
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 
     public Boolean getEmailVerified() {
         return emailVerified;
@@ -305,8 +322,8 @@ public class User implements UserDetails {
     public String getLastName() { return lastName; }
     public void setLastName(String lastName) { this.lastName = lastName; }
 
-    public String getDOB() { return DOB; }
-    public void setDOB(String DOB) { this.DOB = DOB; }
+    public LocalDate getDOB() { return DOB; }
+    public void setDOB(LocalDate DOB) { this.DOB = DOB; }
 
     public String getBloodGroup() { return bloodGroup; }
     public void setBloodGroup(String bloodGroup) { this.bloodGroup = bloodGroup; }

@@ -2,6 +2,7 @@ package SRMS.FinalProject.UserEntity;
 
 import jakarta.persistence.*;
 //
+
 @Entity
 @Table(name = "user_technology")
 public class UserTechnology {

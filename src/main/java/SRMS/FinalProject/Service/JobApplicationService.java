@@ -21,7 +21,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
 
@@ -55,67 +54,10 @@ public class JobApplicationService {
         this.technologyRepository = technologyRepository;
     }
 
-//    public JobApplicationResponse submitApplication(Long userId, MultipartFile file) {
-//        try {
-//            // Get user's technology
-//            String userTechnology = getUserTechnology(userId);
-//
-//            // Fetch matching interviewers
-//            Technology technology = technologyRepository.findByTechName(userTechnology)
-//                    .orElseThrow(() -> new RuntimeException("Technology not found: " + userTechnology));
-//            List<User> interviewers = userRepository.findInterviewersByTechnology(technology.getTech_id());
-//
-//            if (interviewers.isEmpty()) {
-//                throw new RuntimeException("No interviewer found with matching technology: " + userTechnology);
-//            }
-//
-//            // Randomly select one interviewer
-//            User selectedInterviewer = interviewers.get(new Random().nextInt(interviewers.size()));
-//
-//            // Ensure upload directory exists
-//            File uploadDir = new File(UPLOAD_DIR);
-//            if (!uploadDir.exists()) {
-//                uploadDir.mkdirs();
-//            }
-//
-//            // Save uploaded file
-//            String uniqueFileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-//            Path filePath = Paths.get(UPLOAD_DIR).resolve(uniqueFileName).normalize();
-//            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-//
-//            // Save job application
-//            JobApplication application = new JobApplication();
-//            application.setUserId(userId);
-//            application.setFilePath(filePath.toString());
-//            application.setAppliedAt(LocalDateTime.now());
-//            application.setStatus("PENDING");
-//            application.setInterviewerId(selectedInterviewer.getId());
-//            JobApplication savedApplication = jobApplicationRepository.save(application);
-//
-//            // Send email to selected interviewer
-//            sendEmailNotification(selectedInterviewer.getId(), filePath.toString(), userId);
-//
-//            // Create a response object
-//            JobApplicationResponse response = new JobApplicationResponse();
-//            response.setId(savedApplication.getId());
-//            response.setUserId(savedApplication.getUserId());
-//            response.setInterviewerId(selectedInterviewer.getId());  // Set interviewerId
-//            String interviewerEmail = getInterviewerEmail(selectedInterviewer.getId());
-//            response.setInterviewerEmail(interviewerEmail);
-//            response.setFilePath(savedApplication.getFilePath());
-//            response.setAppliedAt(savedApplication.getAppliedAt());
-//            response.setStatus(savedApplication.getStatus());
-//
-//            // Return the response
-//            return response;
-//        } catch (Exception e) {
-//            throw new RuntimeException("Application submission failed: " + e.getMessage());
-//        }
-//    }
 
-    public JobApplicationResponse submitApplication(Long userId, MultipartFile file) {
+    public JobApplicationResponse submitApplication(MultipartFile file, Long userId) {
         try {
-            // Get user's technology
+            // Get user's technology using userId
             String userTechnology = getUserTechnology(userId);
 
             // Fetch matching interviewers
@@ -143,7 +85,7 @@ public class JobApplicationService {
 
             // Save job application
             JobApplication application = new JobApplication();
-            application.setUserId(userId);
+            application.setUserId(userId);  // Use userId directly
             application.setFilePath(filePath.toString());
             application.setAppliedAt(LocalDateTime.now());
             application.setStatus("PENDING");
@@ -174,7 +116,6 @@ public class JobApplicationService {
             throw new RuntimeException("Application submission failed: " + e.getMessage());
         }
     }
-
 
     // Send Email Notification with Resume Attachment to a Single Interviewer
     private void sendEmailNotification(Long interviewerId, String filePath, Long userId) {

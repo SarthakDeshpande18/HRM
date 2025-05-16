@@ -11,8 +11,10 @@ import java.util.Optional;
 //
 @Repository
 public interface UserTechnologyRepository extends JpaRepository<UserTechnology, Long> {
+
     boolean existsByUserAndTechnology(User user, Technology technology);
 
-    // Method to find UserTechnology by userId
     Optional<UserTechnology> findByUserId(Long userId);
+
+    void deleteByUser(User user);
 }

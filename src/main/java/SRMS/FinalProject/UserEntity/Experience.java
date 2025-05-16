@@ -1,9 +1,11 @@
 package SRMS.FinalProject.UserEntity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
+import java.util.List;
 
 @Setter
 @Getter
@@ -27,10 +29,12 @@ public class Experience {
     private Technology technology;
 
     @Column(nullable = false)
-    private String startDate;
+    @JsonFormat(pattern = "dd-mm-yyy")
+    private LocalDate startDate;
 
     @Column(nullable = false)
-    private String endDate;
+    @JsonFormat(pattern = "dd-mm-yyy")
+    private LocalDate endDate;
 
     @Column(columnDefinition = "TEXT")
     private String message;

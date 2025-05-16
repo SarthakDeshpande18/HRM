@@ -109,6 +109,8 @@ public class LoginController {
         try {
             Optional<User> userOptional = userRepository.findByEmail(request.getEmail());
             if (userOptional.isEmpty()) {
+                // Log user not found
+                System.out.println("User not found: " + request.getEmail());
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
                         "status", "error",
                         "message", "User not found",
@@ -119,6 +121,16 @@ public class LoginController {
             authService.authenticateUser(request); // Will throw exception if invalid
 
             User user = userOptional.get();
+
+            if (!user.isEmailVerified()) {
+                // Log unverified email case
+                System.out.println("Email not verified for: " + request.getEmail());
+                return ResponseEntity.badRequest().body(Map.of(
+                        "status", "error",
+                        "message", "Email is not verified. Please verify your email before logging in.",
+                        "data", null
+                ));
+            }
 
             List<String> roleNames = user.getRoles().stream()
                     .map(Role::getRoleName)
@@ -133,14 +145,16 @@ public class LoginController {
             ));
 
         } catch (RuntimeException e) {
+            // Log exception for easier debugging
+            e.printStackTrace();
             return ResponseEntity.badRequest().body(Map.of(
                     "status", "error",
                     "message", "Email is not verified. Please verify your email before logging in.",
                     "data", null
             ));
         }
-
     }
+
 
     @PostMapping("/getById")
     public ResponseEntity<ApiResponse<UserDto>> getUserById(@RequestBody UserDto dto) {

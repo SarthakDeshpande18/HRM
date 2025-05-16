@@ -3,100 +3,25 @@ package SRMS.FinalProject.Controller;
 
 import SRMS.FinalProject.DTO.ApiResponse;
 import SRMS.FinalProject.DTO.JobApplicationResponse;
+import SRMS.FinalProject.Service.CustomUserDetails;
 import SRMS.FinalProject.Service.EmailService;
 import SRMS.FinalProject.Service.JobApplicationService;
 import SRMS.FinalProject.UserEntity.JobApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
-//
-//@RestController
-//@RequestMapping("/api/job")
-//public class JobApplicationController {
-//
-//    private final JobApplicationService service;
-//    private final EmailService emailService;  // Add EmailService
-//
-//    @Autowired
-//    public JobApplicationController(JobApplicationService service, EmailService emailService) {
-//        this.service = service;
-//        this.emailService = emailService;
-//    }
-//
-//    @PostMapping("/submit")
-//    public ResponseEntity<ApiResponse<JobApplication>> submitApplication(
-//            @RequestParam("userId") Long userId,
-//            @RequestParam("interviewerId") Long interviewerId,
-//            @RequestParam("interviewDate") LocalDateTime interviewDate,
-//            @RequestParam("file") MultipartFile file) {
-//
-//        try {
-//            // Validate file type (Only PDFs allowed)
-//            if (!file.getOriginalFilename().toLowerCase().endsWith(".pdf")) {
-//                return ResponseEntity.badRequest()
-//                        .body(new ApiResponse<>(400, "Only PDF files are allowed!", null));
-//            }
-//
-//            // Validate interview date (should be in the future)
-//            if (interviewDate.isBefore(LocalDateTime.now())) {
-//                return ResponseEntity.badRequest()
-//                        .body(new ApiResponse<>(400, "Interview date must be in the future!", null));
-//            }
-//
-//            // Call service method & get saved application
-//            JobApplication savedApplication = service.submitApplication(userId, interviewerId, interviewDate, file);
-//
-//            // Fetch interviewer's email for response
-//            String interviewerEmail = service.getInterviewerEmail(interviewerId); // Now accessible since public
-//
-//            // Send email to the interviewer
-//            String emailBody = "Dear Interviewer, \n\n" +
-//                    "You have a new job application for the interview scheduled on: " + interviewDate.toString() + "\n\n" +
-//                    "Best regards,\nYour Job Application Team";
-//
-//            emailService.sendEmail(interviewerEmail, "New Job Application Submitted", emailBody);
-//
-//            return ResponseEntity.ok(new ApiResponse<>(200,
-//                    "Application submitted successfully! Email sent to interviewer: " + interviewerEmail,
-//                    savedApplication));
-//
-//        } catch (Exception e) {
-//            return ResponseEntity.internalServerError()
-//                    .body(new ApiResponse<>(500, "Error: " + e.getMessage(), null));
-//        }
-//    }
-//
-//    @GetMapping("/all")
-//    public ResponseEntity<ApiResponse<List<JobApplication>>> getAllApplications() {
-//        try {
-//            List<JobApplication> applications = service.getAllApplications();
-//            return ResponseEntity.ok(new ApiResponse<>(200, "Applications fetched successfully!", applications));
-//        } catch (Exception e) {
-//            return ResponseEntity.internalServerError()
-//                    .body(new ApiResponse<>(500, "Error: " + e.getMessage(), null));
-//        }
-//    }
-//
-//    @PutMapping("/update-status/{applicationId}")
-//    public ResponseEntity<ApiResponse<String>> updateStatus(@PathVariable Long applicationId, @RequestParam("status") String status) {
-//        try {
-//            service.updateApplicationStatus(applicationId, status);
-//            return ResponseEntity.ok(new ApiResponse<>(200, "Status updated successfully!", null));
-//        } catch (Exception e) {
-//            return ResponseEntity.internalServerError()
-//                    .body(new ApiResponse<>(500, "Error: " + e.getMessage(), null));
-//        }
-//    }
-//}
-
 
 @RestController
 @RequestMapping("/api/job")
+//@PreAuthorize("hasAuthority('USER')")
 public class JobApplicationController {
 
     private final JobApplicationService service;
@@ -108,26 +33,37 @@ public class JobApplicationController {
         this.emailService = emailService;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/submit")
     public ResponseEntity<ApiResponse<JobApplicationResponse>> submitApplication(
-            @RequestParam("userId") Long userId,
-            @RequestParam("file") MultipartFile file) {
+            @RequestParam("file") MultipartFile file,
+            Authentication authentication) {
 
         try {
-            // Validate file type (Only PDFs allowed)
+            CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+            Long userId = userDetails.getUserId();
+
+            boolean hasUserRole = userDetails.getAuthorities().stream()
+                    .anyMatch(auth -> auth.getAuthority().equals("USER"));
+
+            if (!hasUserRole) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                        .body(new ApiResponse<>(403, "Id "+ userId + "  " +"Role "+ userDetails.getAuthorities()+ "  " +" You do not have the 'USER' role to submit an application.", null));
+            }
+            System.out.println("Authenticated User ID: " + userId);
+            System.out.println("Authorities: " + userDetails.getAuthorities());
+
             if (!file.getOriginalFilename().toLowerCase().endsWith(".pdf")) {
                 return ResponseEntity.badRequest()
                         .body(new ApiResponse<>(400, "Only PDF files are allowed!", null));
             }
 
-            // Call service method & get saved application
-            JobApplicationResponse savedApplication = service.submitApplication(userId, file);
+            JobApplicationResponse savedApplication = service.submitApplication(file, userId);
 
             return ResponseEntity.ok(new ApiResponse<>(200,
                     "Application submitted successfully!", savedApplication));
 
         } catch (RuntimeException e) {
-            // Catch specific RuntimeException (e.g., "User does not have the required 'USER' role.")
             return ResponseEntity.badRequest()
                     .body(new ApiResponse<>(400, e.getMessage(), null));
         } catch (Exception e) {
@@ -135,6 +71,7 @@ public class JobApplicationController {
                     .body(new ApiResponse<>(500, "Error: " + e.getMessage(), null));
         }
     }
+
     @GetMapping("/all")
     public ResponseEntity<ApiResponse<Page<JobApplication>>> getAllApplications(
             @RequestParam(defaultValue = "0") int page, // Default is page 0
