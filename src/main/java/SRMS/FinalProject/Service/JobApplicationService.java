@@ -10,6 +10,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -86,10 +87,9 @@ public class JobApplicationService {
             // Save job application
             JobApplication application = new JobApplication();
             application.setUserId(userId);  // Use userId directly
-            application.setFilePath(filePath.toString());
+            application.setFilePath(uniqueFileName);
             application.setAppliedAt(LocalDateTime.now());
             application.setStatus("PENDING");
-            application.setInterviewerId(selectedInterviewer.getId());
 
             // Store the interviewer's email in the application
             String interviewerEmail = getInterviewerEmail(selectedInterviewer.getId());
@@ -106,7 +106,8 @@ public class JobApplicationService {
             response.setUserId(savedApplication.getUserId());
             response.setInterviewerId(selectedInterviewer.getId());
             response.setInterviewerEmail(interviewerEmail);
-            response.setFilePath(savedApplication.getFilePath());
+            String fileUrl = "http://localhost:8080/api/files/" + savedApplication.getFilePath(); // or your domain
+            response.setFilePath(fileUrl);
             response.setAppliedAt(savedApplication.getAppliedAt());
             response.setStatus(savedApplication.getStatus());
 
@@ -164,10 +165,14 @@ public class JobApplicationService {
     }
 
     private String getUserTechnology(Long userId) {
-        UserTechnology userTech = userTechnologyRepository.findByUserId(userId)
-                .orElseThrow(() -> new RuntimeException("User technology not found"));
-        return userTech.getTechnology().getTechName();
+        List<UserTechnology> userTechList = userTechnologyRepository.findByUserId(userId);
+        if (userTechList.isEmpty()) {
+            throw new RuntimeException("User technology not found");
+        }
+        // Just take the first technology (or handle based on your logic)
+        return userTechList.get(0).getTechnology().getTechName();
     }
+
 
     public String getInterviewerEmail(Long interviewerId) {
         return userRepository.findById(interviewerId)
@@ -188,4 +193,10 @@ public class JobApplicationService {
         application.setStatus(status);
         jobApplicationRepository.save(application);
     }
+    public Page<JobApplication> getByUserId(Long userId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("appliedAt").descending());
+        return jobApplicationRepository.findByUserId(userId, pageable);
+    }
+
+
 }

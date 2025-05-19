@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -65,10 +66,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+
     // Method to get all users with pagination and filtering based on email verification status
     public Page<UserDto> getAllUsers(String filterType, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<User> usersPage;
+
+
 
         switch (filterType.toLowerCase()) {
             case "verified":
@@ -91,6 +95,7 @@ public class UserService {
         Optional<User> userOpt = userRepository.findById(id);
         return userOpt.map(this::convertToUserDto).orElse(null);
     }
+
     // Method to convert User entity to UserDto
     public UserDto convertToUserDto(User user) {
         List<String> roleNames = user.getRoles().stream()
@@ -114,7 +119,7 @@ public class UserService {
                 user.getBloodGroup(),
                 roleNames,
                 techNames,
-                user.getStatus() // ✅ Add this
+                user.getStatus()
         );
     }
 }

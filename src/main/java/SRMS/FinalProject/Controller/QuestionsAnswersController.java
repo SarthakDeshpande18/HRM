@@ -6,49 +6,13 @@ import SRMS.FinalProject.DTO.QuestionAnswersRequestDTO;
 import SRMS.FinalProject.Service.QuestionAnswerService;
 import SRMS.FinalProject.UserEntity.QuestionAnswersEntity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-//
-//@RestController
-//@RequestMapping("/api/questions")
-//@RequiredArgsConstructor
-//public class QuestionsAnswersController {
-//
-//    private final QuestionAnswerService service;
-//
-//    @PostMapping("/filter")
-//    public ResponseEntity<ApiResponse<?>> filterQuestions(@RequestBody QuestionAnswersRequestDTO request) {
-//        ApiResponse<?> response = service.filterQuestions(request);
-//        return ResponseEntity.status(response.getStatus()).body(response);
-//    }
-//
-//    @PostMapping("add")
-//
-//    public ResponseEntity<ApiResponse<?>> addQuestions(@RequestBody List<QuestionAnswersEntity> questions) {
-//        ApiResponse<?> response = service.addQuestions(questions);
-//        return ResponseEntity.ok(response);
-//    }
-//
-//
-//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<ApiResponse<?>> updateQuestion(
-//            @PathVariable Long id,
-//            @RequestBody QuestionAnswersEntity question) {
-//        ApiResponse<?> response = service.updateQuestionById(id, question);
-//        return ResponseEntity.status(response.getStatus()).body(response);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<ApiResponse<?>> deleteQuestion(@PathVariable Long id) {
-//        ApiResponse<?> response = service.deleteQuestionById(id);
-//        return ResponseEntity.status(response.getStatus()).body(response);
-//}
-//}
-
+import java.util.Collections;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/questions")
@@ -56,34 +20,42 @@ import java.util.List;
 public class QuestionsAnswersController {
 
     private final QuestionAnswerService service;
-
-    @PostMapping("/filter")
+    @PostMapping
     public ResponseEntity<ApiResponse<?>> filterQuestions(
             @RequestBody QuestionAnswersRequestDTO request,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
-        ApiResponse<?> response = service.filterQuestions(request, page, size);
+
+        Pageable pageable = PageRequest.of(page, size);
+        ApiResponse<?> response = service.filterQuestions(request.getFilter(), pageable);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @PostMapping("add")
-    public ResponseEntity<ApiResponse<?>> addQuestions(@RequestBody List<QuestionAnswersEntity> questions) {
-        ApiResponse<?> response = service.addQuestions(questions);
+    public ResponseEntity<ApiResponse<?>> addQuestion(@RequestBody QuestionAnswersEntity question) {
+        ApiResponse<?> response = service.addQuestions(Collections.singletonList(question));
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<?>> updateQuestion(
-            @PathVariable Long id,
-            @RequestBody QuestionAnswersEntity question) {
+
+    @PutMapping("/update")
+    public ResponseEntity<ApiResponse<?>> updateQuestion(@RequestBody QuestionAnswersEntity question) {
+        Long id = question.getId();
+        if (id == null) {
+            return ResponseEntity.badRequest().body(new ApiResponse<>(400, "ID is required in request body", null));
+        }
         ApiResponse<?> response = service.updateQuestionById(id, question);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<?>> deleteQuestion(@PathVariable Long id) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<ApiResponse<?>> deleteQuestion(@RequestBody Map<String, Long> request) {
+        Long id = request.get("id");
+        if (id == null) {
+            return ResponseEntity.badRequest().body(new ApiResponse<>(400, "ID is required in request body", null));
+        }
         ApiResponse<?> response = service.deleteQuestionById(id);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
-}
 
+}

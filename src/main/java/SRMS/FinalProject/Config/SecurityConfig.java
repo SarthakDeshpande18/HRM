@@ -57,8 +57,10 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/register", "/api/auth/verify-otp", "/api/auth/resend-otp", "/api/auth/login").permitAll()
 //
                                 .requestMatchers("/api/job/submit").hasAuthority("USER")
+                                .requestMatchers("/api/job/update-status").hasAuthority("ADMIN")
                                 .requestMatchers("/api/openings/**").hasAnyAuthority("USER", "ADMIN")
                                 .requestMatchers("/api/technologies/**").hasAnyAuthority("USER", "ADMIN")
+                                .requestMatchers("/api/questions/**").hasAnyAuthority("INTERVIEWER", "ADMIN")
 
                         .anyRequest().authenticated()
                 )

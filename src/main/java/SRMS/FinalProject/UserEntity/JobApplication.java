@@ -22,9 +22,6 @@ public class JobApplication {
     private Long userId;
 
     @NotNull
-    private Long interviewerId;
-
-    @NotNull
     private String filePath;
 
     private LocalDateTime interviewDate;
