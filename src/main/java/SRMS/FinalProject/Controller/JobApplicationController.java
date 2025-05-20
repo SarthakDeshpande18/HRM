@@ -20,6 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -177,6 +178,47 @@ public class JobApplicationController {
                     .body(new ApiResponse<>(500, "Error: " + e.getMessage(), null));
         }
     }
+
+
+    @GetMapping("/download/{filename:.+}")
+    public ResponseEntity<Resource> downloadResume(@PathVariable String filename) {
+        try {
+            if (filename.contains("..")) {
+                return ResponseEntity.badRequest().build(); // prevent path traversal
+            }
+
+            Path filePath = Paths.get(UPLOAD_DIR).resolve(filename).normalize();
+
+            System.out.println("Downloading file from: " + filePath.toString());
+
+            Resource resource = new UrlResource(filePath.toUri());
+
+            if (!resource.exists() || !resource.isReadable()) {
+                System.out.println("File not found or not readable.");
+                return ResponseEntity.notFound().build();
+            }
+
+            // Determine content type dynamically
+            String contentType = Files.probeContentType(filePath);
+            if (contentType == null) {
+                contentType = "application/pdf"; // default to PDF
+            }
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType(contentType))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"") // 👈 Change here
+                    .body(resource);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+
 
 
 }

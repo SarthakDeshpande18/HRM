@@ -9,16 +9,17 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import jakarta.mail.MessagingException;
 
 @Service
 public class InterviewService {
     private final InterviewRepository repository;
     private final EmailService emailService;
+
+    private final String logoPath = "D:/HRM/src/main/resources/templates/logo/OtpLogo.png";
 
     public InterviewService(InterviewRepository repository, EmailService emailService) {
         this.repository = repository;
@@ -34,7 +35,7 @@ public class InterviewService {
         boolean emailExists = repository.existsByCandidateEmail(interview.getCandidateEmail());
         if (emailExists) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body(new ApiResponse<>(409, "Email is already used", null));
+                    .body(new ApiResponse<>(409, "This Email Has Already interview Scheduled", null));
         }
 
         boolean isInterviewerBooked = repository.existsByInterviewerIdAndDateTime(interview.getInterviewerId(), interview.getDateTime());
@@ -44,14 +45,27 @@ public class InterviewService {
         }
 
         InterviewEntity savedInterview = repository.save(interview);
-        emailService.sendEmail(
-                interview.getCandidateEmail(),
-                "Interview Scheduled",
-                "Dear Candidate,\nYour interview has been scheduled.\nDate & Time: " + interview.getDateTime() +
-                        "\nMode: " + interview.getMode() +
-                        (interview.getMode().equals("Online") ? "\nMeeting Link: " + interview.getMeetingLink() : "\nLocation: " + interview.getLocation()) +
-                        "\n\nBest Regards,\nHR Team"
-        );
+
+        // Send formatted HTML email to Candidate
+        try {
+            emailService.sendEmailWithLogo(
+                    interview.getCandidateEmail(),
+                    "Interview Scheduled",
+                    buildCandidateEmailBody(interview),
+                    logoPath
+            );
+
+            // Send formatted HTML email to Interviewer
+            emailService.sendEmailWithLogo(
+                    interview.getInterviewerEmail(),
+                    "Interview Scheduled with Candidate",
+                    buildInterviewerEmailBody(interview),
+                    logoPath
+            );
+        } catch (MessagingException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse<>(500, "Interview saved but email sending failed: " + e.getMessage(), savedInterview));
+        }
 
         ApiResponse<InterviewEntity> response = new ApiResponse<>(201, "Interview scheduled successfully", savedInterview);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -79,7 +93,6 @@ public class InterviewService {
         return ResponseEntity.ok(response);
     }
 
-
     public ResponseEntity<ApiResponse<InterviewEntity>> updateInterview(Long id, InterviewEntity updatedInterview) {
         return repository.findById(id).map(interview -> {
             interview.setDateTime(updatedInterview.getDateTime());
@@ -104,5 +117,42 @@ public class InterviewService {
             ApiResponse<String> response = new ApiResponse<>(404, "Interview not found", null);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
+    }
+
+    public String buildCandidateEmailBody(InterviewEntity interview) {
+        String locationOrLink = interview.getMode().equalsIgnoreCase("Online")
+                ? "<p><strong>Meeting Link:</strong> " + interview.getMeetingLink() + "</p>"
+                : "<p><strong>Location:</strong> " + interview.getLocation() + "</p>";
+
+        return "<html><body>"
+                + "<div style='font-family: Arial, sans-serif; color: #333;'>"
+                + "<div style='text-align: center; margin-bottom: 50px;'>"
+                + "<img src='cid:OtpLogo' alt='Company Logo' style='width: 200px; margin-bottom: 50px;'/>"
+                + "<h2 style='color: #4CAF50;'>Interview Scheduled Successfully!</h2>"
+                + "<p style='font-size: 18px;'>Dear Candidate,</p>"
+                + "<p>Your interview has been scheduled. Please find the details below:</p>"
+                + "<p><strong>Date & Time:</strong> " + interview.getDateTime() + "</p>"
+                + "<p><strong>Mode:</strong> " + interview.getMode() + "</p>"
+                + locationOrLink
+                + "<p>We look forward to your participation...</p>"
+                + "</div></div></body></html>";
+    }
+
+    public String buildInterviewerEmailBody(InterviewEntity interview) {
+        String locationOrLink = interview.getMode().equalsIgnoreCase("Online")
+                ? "<p><strong>Meeting Link:</strong> " + interview.getMeetingLink() + "</p>"
+                : "<p><strong>Location:</strong> " + interview.getLocation() + "</p>";
+
+        return "<html><body>"
+                + "<div style='font-family: Arial, sans-serif; color: #333;'>"
+                + "<div style='text-align: center; margin-bottom: 50px;'>"
+                + "<img src='cid:OtpLogo' alt='Company Logo' style='width: 200px; margin-bottom: 50px;'/>"
+                + "<h2 style='color: #2196F3;'>Dear Interviewer,</h2>"
+                + "<p>You have been assigned to conduct an interview. Please find the details below:</p>"
+                + "<p><strong>Candidate Email:</strong> " + interview.getCandidateEmail() + "</p>"
+                + "<p><strong>Date & Time:</strong> " + interview.getDateTime() + "</p>"
+                + "<p><strong>Mode:</strong> " + interview.getMode() + "</p>"
+                + locationOrLink
+                + "</div></div></body></html>";
     }
 }

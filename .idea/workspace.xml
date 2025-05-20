@@ -6,17 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="6ee4e163-05dd-4003-b468-fef6e1ad4b42" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Config/CorsConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/InterviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/InterviewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/JobApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/JobApplicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/QuestionsAnswersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/QuestionsAnswersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/JobApplicationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/JobApplicationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/UserTechnologyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/UserTechnologyRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/ForgotPasswordUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/ForgotPasswordUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/JobApplicationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/JobApplicationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/QuestionAnswerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/QuestionAnswerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/JobApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/JobApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/EmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/InterviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/InterviewService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/InterviewEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/InterviewEntity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

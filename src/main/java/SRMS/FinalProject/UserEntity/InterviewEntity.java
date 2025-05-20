@@ -21,13 +21,16 @@ public class InterviewEntity {
     private Long id;
 
     @Column(nullable = false)
-    private Long candidateId;
+    private Long userId;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long interviewerId;
 
     @Column(nullable = false)
     private LocalDateTime dateTime;
+
+    @Column(nullable = true)
+    private String interviewerEmail;
 
     @Column(nullable = false)
     private String mode; // Online/Offline
@@ -39,9 +42,9 @@ public class InterviewEntity {
     private String remarks;
 
     @Column(nullable = false)
-    private String status; // Scheduled, Rescheduled, Canceled
+    private String status;
 
-    private String candidateEmail; // <-- Add this field
+    private String candidateEmail;
 
     // Getters and Setters
     public String getCandidateEmail() {

@@ -61,8 +61,8 @@ public class SecurityConfig {
                                 .requestMatchers("/api/openings/**").hasAnyAuthority("USER", "ADMIN")
                                 .requestMatchers("/api/technologies/**").hasAnyAuthority("USER", "ADMIN")
                                 .requestMatchers("/api/questions/**").hasAnyAuthority("INTERVIEWER", "ADMIN")
-
-                        .anyRequest().authenticated()
+                                .requestMatchers("/api/job/download/**").permitAll()
+                                .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

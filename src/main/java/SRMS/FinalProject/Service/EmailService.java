@@ -3,32 +3,13 @@ package SRMS.FinalProject.Service;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-
-//@Service
-//public class EmailService {
-//
-//    private final MailSender mailSender;
-//
-//    @Autowired
-//    public EmailService(MailSender mailSender) {
-//        this.mailSender = mailSender;
-//    }
-//
-//    public void sendEmail(String to, String subject, String body) {
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setTo(to);
-//        message.setSubject(subject);
-//        message.setText(body);
-//        mailSender.send(message);
-//    }
-//}
 
 @Service
 public class EmailService {
@@ -95,5 +76,19 @@ public class EmailService {
 
         sendEmail1(email, "OTP Verification Code", body, logoPath);
     }
+    public void sendEmailWithLogo(String to, String subject, String htmlBody, String logoPath) throws MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(htmlBody, true);
+
+        FileSystemResource res = new FileSystemResource(new File(logoPath));
+        helper.addInline("OtpLogo", res);
+
+        mailSender.send(message);
+    }
+
 }
 
