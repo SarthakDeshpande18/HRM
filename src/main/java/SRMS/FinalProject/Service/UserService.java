@@ -9,56 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-//
-//@Service
-//public class UserService {
-//
-//    @Autowired
-//    private UserRepository userRepository;
-//
-//    public Page<UserDto> getAllUsers(String filterType, int page, int size) {
-//        Pageable pageable = PageRequest.of(page, size);
-//        Page<User> usersPage;
-//
-//        switch (filterType) {
-//            case "verified":
-//                usersPage = userRepository.findByEmailVerified(true, pageable);
-//                break;
-//            case "unverified":
-//                usersPage = userRepository.findByEmailVerified(false, pageable);
-//                break;
-//            case "all":
-//            default:
-//                usersPage = userRepository.findAll(pageable);
-//                break;
-//        }
-//
-//        return usersPage.map(user -> new UserDto(
-//                user.getId(),
-//                user.getEmail(),
-//                user.getUsername(),
-//                user.getMobileNo(),
-//                user.getEmailVerified(),
-//                user.getBloodGroup(),
-//                user.getDOB() != null ? user.getDOB().toString() : null,
-//                user.getFirstName(),
-//                user.getMiddleName(),
-//                user.getLastName()
-//        ));
-//    }
-//
-//    public User getUserById(Long id) {
-//        return userRepository.findById(id).orElse(null);
-//    }
-//}
-//
 
 @Service
 public class UserService {
@@ -119,7 +73,8 @@ public class UserService {
                 user.getBloodGroup(),
                 roleNames,
                 techNames,
-                user.getStatus()
+                user.getStatus(),
+                user.getProfilePicture()
         );
     }
 }

@@ -1,8 +1,10 @@
 package SRMS.FinalProject.Controller;
 
 import SRMS.FinalProject.DTO.ApiResponse;
+import SRMS.FinalProject.DTO.UserTechnologyDTO;
 import SRMS.FinalProject.Service.TechnologyService;
 import SRMS.FinalProject.UserEntity.Technology;
+import SRMS.FinalProject.UserEntity.UserTechnology;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,63 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-//
-//@RestController
-//@RequestMapping("/api/technologies")
-//public class TechnologyController {
-//
-//    @Autowired
-//    private TechnologyService technologyService;
-//
-//    @PostMapping
-//    public ResponseEntity<ApiResponse<Technology>> createTechnology(@RequestBody Technology technology) {
-//        Technology savedTech = technologyService.addTechnology(technology);
-//        if (savedTech == null) {
-//            return ResponseEntity.status(HttpStatus.CONFLICT)
-//                    .body(new ApiResponse<>(409, "Technology already exists", null));
-//        }
-//        return ResponseEntity.ok(new ApiResponse<>(200, "Technology created successfully", savedTech));
-//    }
-//
-//
-//    @GetMapping
-//    public ResponseEntity<ApiResponse<List<Technology>>> getAllTechnologies() {
-//        List<Technology> techList = technologyService.getAllTechnologies();
-//        return ResponseEntity.ok(new ApiResponse<>(200, "Fetched all technologies", techList));
-//    }
-//
-//    @PostMapping("/getById")
-//    public ResponseEntity<ApiResponse<Technology>> getTechnologyById(@RequestBody Map<String, Long> payload) {
-//        Long id = payload.get("tech_id");
-//        return technologyService.getTechnologyById(id)
-//                .map(tech -> ResponseEntity.ok(new ApiResponse<>(200, "Successfull", tech)))
-//                .orElse(ResponseEntity.status(404).body(new ApiResponse<>(404, "Technology ID " + id + " not found", null)));
-//    }
-//
-//
-//    @PostMapping("/update")
-//    public ResponseEntity<ApiResponse<Technology>> updateTechnology(@RequestBody Technology technology) {
-//        Long id = technology.getTech_id();
-//        try {
-//            Technology updatedTech = technologyService.updateTechnology(id, technology);
-//            return ResponseEntity.ok(new ApiResponse<>(200, "Technology updated successfully", updatedTech));
-//        } catch (RuntimeException e) {
-//            return ResponseEntity.status(404).body(new ApiResponse<>(404, "Technology ID " + id + " not found", null));
-//        }
-//    }
-//
-//    @PostMapping("/delete")
-//    public ResponseEntity<ApiResponse<Void>> deleteTechnology(@RequestBody Map<String, Long> payload) {
-//        Long id = payload.get("tech_id");
-//        boolean deleted = technologyService.deleteTechnology(id);
-//        if (deleted) {
-//            return ResponseEntity.ok(new ApiResponse<>(200, "Technology deleted successfully", null));
-//        } else {
-//            return ResponseEntity.status(404).body(new ApiResponse<>(404, "Technology ID " + id + " not found", null));
-//        }
-//    }
-//
-//}
 
 
 @RestController
@@ -133,5 +78,42 @@ public class TechnologyController {
             return ResponseEntity.status(404).body(new ApiResponse<>(404, "Technology ID " + id + " not found", null));
         }
     }
+
+    @GetMapping("/AllUserTech")
+    public ResponseEntity<ApiResponse<Page<UserTechnologyDTO>>> getAllUserTechnologies(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<UserTechnologyDTO> pagedResult = technologyService.getAllUserTechnology(pageable);
+
+        return ResponseEntity.ok(new ApiResponse<>(200, "Fetched all user-technologies", pagedResult));
+    }
+
+
+
+    @PostMapping("/userTechById")
+    public ResponseEntity<ApiResponse<Page<UserTechnologyDTO>>> getUserTechnologiesByUserId(
+            @RequestBody Map<String, Long> payload,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        Long userId = payload.get("userId");
+        if (userId == null) {
+            return ResponseEntity.badRequest()
+                    .body(new ApiResponse<>(400, "userId is required in request body", null));
+        }
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<UserTechnologyDTO> resultPage = technologyService.getUserTechnologyDTOsByUserId(userId, pageable);
+
+        if (resultPage.isEmpty()) {
+            return ResponseEntity.status(404)
+                    .body(new ApiResponse<>(404, "No technologies found for user id " + userId, null));
+        }
+
+        return ResponseEntity.ok(new ApiResponse<>(200, "Fetched user-technologies by user id", resultPage));
+    }
+
 
 }

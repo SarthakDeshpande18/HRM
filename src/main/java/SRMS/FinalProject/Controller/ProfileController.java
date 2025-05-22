@@ -37,7 +37,7 @@ public class ProfileController {
     @PutMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ApiResponse<String>> updateProfileMultipart(
             @RequestHeader("Authorization") String authHeader,
-            @RequestPart("profileDTO") ProfileDTO profileDTO,
+            @RequestPart(value = "profileDTO", required = false) ProfileDTO profileDTO,
             @RequestPart(value = "profileImage", required = false) MultipartFile profileImage) {
 
         return updateProfileInternal(authHeader, profileDTO, profileImage);
@@ -54,10 +54,12 @@ public class ProfileController {
 
         if (profileImage != null && !profileImage.isEmpty()) {
             String originalFilename = profileImage.getOriginalFilename();
-            if (originalFilename == null || !originalFilename.toLowerCase().endsWith(".jpg")) {
-                ApiResponse<String> response = new ApiResponse<>(400, "Only .jpg files are allowed for profile picture", null);
+            if (originalFilename == null ||
+                    !(originalFilename.toLowerCase().endsWith(".jpg") || originalFilename.toLowerCase().endsWith(".png"))) {
+                ApiResponse<String> response = new ApiResponse<>(400, "Only .jpg or .png files are allowed for profile picture", null);
                 return ResponseEntity.badRequest().body(response);
             }
+
         }
 
         String token = authHeader.startsWith("Bearer ") ? authHeader.substring(7) : authHeader;

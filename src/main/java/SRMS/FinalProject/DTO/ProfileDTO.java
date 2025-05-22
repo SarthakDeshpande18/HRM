@@ -41,5 +41,4 @@ public class ProfileDTO {
     private String lastName;
 
     private Long roleId;
-    private MultipartFile profileImage;
 }

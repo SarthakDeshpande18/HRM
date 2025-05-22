@@ -1,5 +1,7 @@
 package SRMS.FinalProject.DTO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,13 +20,15 @@ import java.util.List;
         private List<String> roles;
         private List<String> technologies;
         private String status;
+        @JsonProperty("profileImage")
+        private String profilePicture;
 
     public UserDto() {}
 
         // Constructor for scenarios where roles and technologies are needed
         public UserDto(Long id, String firstName, String middleName, String lastName, String email,
                        String username, String mobileNo, LocalDate DOB, Boolean emailVerified,
-                       String bloodGroup, List<String> roles, List<String> technologies, String status) {
+                       String bloodGroup, List<String> roles, List<String> technologies, String status, String profilePicture) {
             this.id = id;
             this.firstName = firstName;
             this.middleName = middleName;
@@ -38,6 +42,7 @@ import java.util.List;
             this.roles = roles;
             this.technologies = technologies;
             this.status = status;
+            this.profilePicture = profilePicture;
         }
 
         // Constructor for scenarios where roles and technologies are not needed
@@ -92,7 +97,15 @@ import java.util.List;
         public List<String> getTechnologies() { return technologies; }
         public void setTechnologies(List<String> technologies) { this.technologies = technologies; }
 
-    public String getStatus() {
+        public String getProfilePicture() {
+            return profilePicture;
+        }
+
+        public void setProfilePicture(String profilePicture) {
+            this.profilePicture = profilePicture;
+        }
+
+        public String getStatus() {
         return status;
     }
 

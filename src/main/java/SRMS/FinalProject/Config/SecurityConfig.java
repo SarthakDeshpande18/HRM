@@ -62,6 +62,10 @@ public class SecurityConfig {
                                 .requestMatchers("/api/technologies/**").hasAnyAuthority("USER", "ADMIN")
                                 .requestMatchers("/api/questions/**").hasAnyAuthority("INTERVIEWER", "ADMIN")
                                 .requestMatchers("/api/job/download/**").permitAll()
+                                .requestMatchers("/api/profile/**").permitAll()
+                                .requestMatchers("/uploads/**").permitAll()
+                                .requestMatchers("/uploads/profile-pictures/**").permitAll()
+
                                 .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
