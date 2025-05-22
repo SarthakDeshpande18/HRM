@@ -35,7 +35,7 @@ public class JobApplicationController {
 
     private final JobApplicationService service;
     private final EmailService emailService;
-    private static final String UPLOAD_DIR = "D:/HRM/src/main/resources/uploads/";
+    private static final String UPLOAD_DIR = "D:/HRM/uploads/";
 
     @Autowired
     public JobApplicationController(JobApplicationService service, EmailService emailService) {

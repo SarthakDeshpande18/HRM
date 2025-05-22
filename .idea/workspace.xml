@@ -6,47 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6ee4e163-05dd-4003-b468-fef6e1ad4b42" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/TechnologyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/TechnologyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/DTO/ProfileDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/DTO/ProfileDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/DTO/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/DTO/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/UserTechnologyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Repository/UserTechnologyRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/JobApplicationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/JobApplicationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/ProfileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/ProfileService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/TechnologyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/TechnologyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/UserTechnology.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/UserTechnology.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/01b2bfec-f22a-4387-b3e0-939591de2e14_Resume (1).pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/11f48d77-45c7-4569-af83-404736186bfd_resume.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/1401b4f8-9f19-4f1e-928b-0217b2ba5232_Resume (1).pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/1d68ea7b-3e5a-46cd-b902-34ab04013880_Resume (1).pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/20f92d02-8d98-4269-9c76-c182cf06ac15_resume.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/364e0abe-2001-4b2b-b8c6-2b216b468338_Resume (1).pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/3f2e07ca-f9cf-4fd5-99cd-36f70fda8590_Research_on_Employee_Performance_Prediction_Based_on_Machine_Learning.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/3fea9148-e7e8-4468-81a0-269098319fa8_Research_on_Employee_Performance_Prediction_Based_on_Machine_Learning.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/454ac783-19f0-48a9-b591-230018cae82b_Resume (1).pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/581a68bd-f462-4d45-80d2-d92465ff629d_Resume (1).pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/58c399c8-ae22-4960-a8ce-f14dbcf3cc73_Resume (1).pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/5a442e7c-d5f4-461a-b5ad-b1163e3f4a9d_resume.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/65b3ffd7-bd9f-4722-b98b-1f2ba713bfb9_Resume (1).pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/733bbbda-047e-4a0f-b783-26cb20954db3_resume.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/75952ceb-c963-43d7-8c70-d2d6c2141ddd_resume.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/84405d7e-7e71-4888-9964-fb67171f16f9_Research_on_Employee_Performance_Prediction_Based_on_Machine_Learning.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/8844032c-3daa-48b7-b929-65efcf0935b3_resume.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/963ec787-8a7d-45db-af43-de25dadfb435_Resume (1).pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/9c9d1690-9be4-4395-8b8b-83e54cba4714_Resume (1).pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/a1da516e-7345-456a-bdf8-30dc02a1ce31_resume.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/a94ff50d-c445-44cc-a71b-738aae28cf9a_Research_on_Employee_Performance_Prediction_Based_on_Machine_Learning.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/b2c6fe37-c5e3-4b35-a783-88445d6236d7_Resume (1).pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/c3975fe2-045b-41b7-b744-302f83aae113_Research_on_Employee_Performance_Prediction_Based_on_Machine_Learning.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/cd028b41-fed5-4b27-a0bf-d51b4e633d8e_resume.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/cd635acb-2e21-4bf3-8133-81a129222d05_resume.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/d03e8ed9-796a-4ef6-9971-7f1ee4bd101f_resume.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/ed9a42f7-9b47-46ae-a5cf-09071148a694_Research_on_Employee_Performance_Prediction_Based_on_Machine_Learning.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/f891d531-b8d2-4cb6-b163-6badd48da411_Research_on_Employee_Performance_Prediction_Based_on_Machine_Learning.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/uploads/f94586fa-a87f-498f-a9f1-4c67ec4f6d7c_resume.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/JobApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/JobApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/JobApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/UserEntity/JobApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

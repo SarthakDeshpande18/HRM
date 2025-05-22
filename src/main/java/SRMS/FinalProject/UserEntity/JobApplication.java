@@ -24,7 +24,8 @@ public class JobApplication {
     @NotNull
     private String filePath;
 
-    private LocalDateTime interviewDate;
+
+    //private LocalDateTime interviewDate;
     private LocalDateTime appliedAt = LocalDateTime.now();
     //private boolean isReviewed = false;
 
