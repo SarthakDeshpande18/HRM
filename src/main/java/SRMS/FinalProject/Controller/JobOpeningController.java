@@ -17,8 +17,8 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Map;
 
+
 @RestController
-//@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/api/job-openings")
 public class JobOpeningController {
 
@@ -32,15 +32,14 @@ public class JobOpeningController {
             JobOpenings savedJob = jobOpeningsService.addJobOpening(jobOpening);
             return ResponseEntity.ok(new ApiResponse<>(200, "Job opening created successfully", savedJob));
         } catch (ResponseStatusException ex) {
-            // Catch the 409 conflict and return a structured JSON response
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(new ApiResponse<>(409, ex.getReason(), null));
         } catch (Exception ex) {
-            // Handle any other unexpected exceptions
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse<>(500, "An unexpected error occurred", null));
         }
     }
+
 
 
     @GetMapping("/all")
@@ -62,17 +61,17 @@ public class JobOpeningController {
     }
 
 
+
     @PostMapping("/update")
     public ResponseEntity<ApiResponse<JobOpenings>> updateJobOpening(@RequestBody JobOpenings jobOpening) {
         Long id = jobOpening.getId();
         try {
             JobOpenings updated = jobOpeningsService.updateJobOpening(id, jobOpening);
-            return ResponseEntity.ok(new ApiResponse<>(200, "Job opening ID " + id + "updated successfully", updated));
+            return ResponseEntity.ok(new ApiResponse<>(200, "Job opening ID " + id + " updated successfully", updated));
         } catch (RuntimeException e) {
             return ResponseEntity.status(404).body(new ApiResponse<>(404, "Job Opening ID " + id + " not found", null));
         }
     }
-
 
     @PostMapping("/delete")
     public ResponseEntity<ApiResponse<Void>> deleteJobOpening(@RequestBody Map<String, Long> payload) {

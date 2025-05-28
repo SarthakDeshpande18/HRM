@@ -1,8 +1,10 @@
 package SRMS.FinalProject.UserEntity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name="technology")
 public class Technology
 {

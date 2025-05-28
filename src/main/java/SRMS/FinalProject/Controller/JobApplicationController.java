@@ -30,7 +30,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/job")
-//@PreAuthorize("hasAuthority('USER')")
 public class JobApplicationController {
 
     private final JobApplicationService service;
@@ -43,7 +42,7 @@ public class JobApplicationController {
         this.emailService = emailService;
     }
 
-    @PreAuthorize("hasRole('USER')")
+
     @PostMapping("/submit")
     public ResponseEntity<ApiResponse<JobApplicationResponse>> submitApplication(
             @RequestParam("file") MultipartFile file,
@@ -82,7 +81,6 @@ public class JobApplicationController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<ApiResponse<Page<JobApplication>>> getAllApplications(
             @RequestParam(defaultValue = "0") int page, // Default is page 0
@@ -97,8 +95,6 @@ public class JobApplicationController {
     }
 
 
-    // Endpoint to update application status (pending to reviewed/accepted/rejected)
-    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update-status")
     public ResponseEntity<ApiResponse<String>> updateStatus(@RequestBody JobApplicationResponse request) {
         try {
@@ -217,10 +213,6 @@ public class JobApplicationController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
-
-
-
 }
 
 

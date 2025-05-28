@@ -19,7 +19,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin/users")
-//@PreAuthorize("hasRole('ADMIN')") // Ensures only ADMIN can access
 public class AdminRoleController {
 
     @Autowired
@@ -76,6 +75,5 @@ public class AdminRoleController {
                     .body(new ApiResponse<>(500, "Error fetching user roles: " + e.getMessage(), null));
         }
     }
-
 
 }

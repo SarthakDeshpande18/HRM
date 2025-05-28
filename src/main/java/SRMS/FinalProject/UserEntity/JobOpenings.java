@@ -13,6 +13,15 @@ public class JobOpenings {
     @Column(name = "jobDescription", nullable = false)
     private String jobDescription;
 
+    @Column(name = "Year_Of_Experience", nullable = false)
+    private String yearOfExperience;
+
+    @Column(name = "JobType", nullable = false)
+    private String jobType;
+
+    @ManyToOne(fetch = FetchType.LAZY) // or EAGER, depending on your use case
+    @JoinColumn(name = "tech_id")
+    private Technology technology;
 
     public String getYearOfExperience() {
         return yearOfExperience;
@@ -22,14 +31,14 @@ public class JobOpenings {
         this.yearOfExperience = yearOfExperience;
     }
 
-    @Column(name = "Year_Of_Experience", nullable = false)
-    private String yearOfExperience;
 
-    @Column(name = "JobType", nullable = false)
-    private String jobType;
+    public Technology getTechnology() {
+        return technology;
+    }
 
-
-
+    public void setTechnology(Technology technology) {
+        this.technology = technology;
+    }
 
     public Long getId() {
         return id;
