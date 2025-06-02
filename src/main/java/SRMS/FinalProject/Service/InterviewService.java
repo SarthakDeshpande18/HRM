@@ -32,11 +32,11 @@ public class InterviewService {
                     .body(new ApiResponse<>(400, "Email is not in proper format", null));
         }
 
-        boolean emailExists = repository.existsByCandidateEmail(interview.getCandidateEmail());
-        if (emailExists) {
-            return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body(new ApiResponse<>(409, "This Email Has Already interview Scheduled", null));
-        }
+//        boolean emailExists = repository.existsByCandidateEmail(interview.getCandidateEmail());
+//        if (emailExists) {
+//            return ResponseEntity.status(HttpStatus.CONFLICT)
+//                    .body(new ApiResponse<>(409, "This Email Has Already interview Scheduled", null));
+//        }
 
         boolean isInterviewerBooked = repository.existsByInterviewerIdAndDateTime(interview.getInterviewerId(), interview.getDateTime());
         if (isInterviewerBooked) {
@@ -117,6 +117,10 @@ public class InterviewService {
             ApiResponse<String> response = new ApiResponse<>(404, "Interview not found", null);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
+    }
+    public Page<InterviewEntity> getInterviewsByUserId(Long userId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return repository.findByUserId(userId, pageable);
     }
 
     public String buildCandidateEmailBody(InterviewEntity interview) {
