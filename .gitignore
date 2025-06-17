@@ -21,4 +21,4 @@
 # Optionally ignore the entire project directory if it's part of your IDE-specific folder structure (e.g. FinalProject)
 # If you have a directory structure like "FinalProject/.idea", you can ignore the entire "FinalProject" directory, or the .idea folder inside it
 FinalProject/.idea/
-FinalProject/
+

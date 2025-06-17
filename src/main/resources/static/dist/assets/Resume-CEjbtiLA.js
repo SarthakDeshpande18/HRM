@@ -1,0 +1,1 @@
+import{j as e}from"./index-D-PUqx1D.js";const t=()=>e.jsxs("div",{children:[e.jsx("h1",{className:"text-2xl font-bold mb-4",children:"Resume"}),e.jsx("div",{className:"bg-white p-6 rounded-lg shadow-md",children:e.jsx("p",{children:"This is the resume page content."})})]});export{t as default};

@@ -28,7 +28,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "WHERE ur.role.roleName = 'INTERVIEWER' AND ut.technology.id = :technologyId")
     List<User> findInterviewersByTechnology(@Param("technologyId") Long technologyId);
 
+    User findByFirstNameAndLastName(String firstName, String lastName);
 }
+
 
 
 

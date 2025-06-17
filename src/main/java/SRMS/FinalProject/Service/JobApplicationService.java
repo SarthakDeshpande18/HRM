@@ -28,7 +28,7 @@ import java.util.UUID;
 @Service
 public class JobApplicationService {
 
-    private static final String UPLOAD_DIR = "D:/HRM/uploads/";
+    private static final String UPLOAD_DIR = "E:/HRM/uploads/";
 
     private final JobApplicationRepository jobApplicationRepository;
     private final JavaMailSender mailSender;

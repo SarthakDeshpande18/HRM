@@ -55,7 +55,6 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/auth/register", "/api/auth/verify-otp", "/api/auth/resend-otp", "/api/auth/login").permitAll()
-//
                                 .requestMatchers("/api/job/submit").hasAuthority("USER")
                                 .requestMatchers("/api/job/update-status").hasAuthority("ADMIN")
                                 .requestMatchers("/api/openings/**").hasAnyAuthority("USER", "ADMIN")
@@ -65,10 +64,14 @@ public class SecurityConfig {
                                 .requestMatchers("/api/questions/**").hasAnyAuthority("INTERVIEWER", "ADMIN")
                                 .requestMatchers("/api/interviews/**").hasAnyAuthority("USER", "ADMIN","INTERVIEWER")
                                 .requestMatchers("/api/interviews/**").hasAnyAuthority("USER", "ADMIN","INTERVIEWER")
+                                .requestMatchers("/api/video/**").permitAll()
+                                .requestMatchers("/api/video/create-room").permitAll()
                                 .requestMatchers("/api/job/download/**").permitAll()
                                 .requestMatchers("/api/profile/**").permitAll()
                                 .requestMatchers("/uploads/**").permitAll()
                                 .requestMatchers("/uploads/profile-pictures/**").permitAll()
+                                .requestMatchers("/api/calendar/**").permitAll()
+
 
                                 .anyRequest().authenticated()
                 )

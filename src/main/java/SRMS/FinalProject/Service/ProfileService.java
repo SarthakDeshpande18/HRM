@@ -207,7 +207,7 @@ public class ProfileService {
             // Save profile image if provided
             if (profileImage != null && !profileImage.isEmpty()) {
                 String fileName = UUID.randomUUID() + "_" + profileImage.getOriginalFilename();
-                String uploadDir = "D:/HRM/uploads/profile-pictures/";
+                String uploadDir = "D:/Duplicate/HRM (2)/HRM/uploads/profile-pictures/";
 
                 File uploadPath = new File(uploadDir);
                 if (!uploadPath.exists()) uploadPath.mkdirs();

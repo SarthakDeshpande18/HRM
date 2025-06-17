@@ -1,0 +1,1 @@
+import{j as s}from"./index-D-PUqx1D.js";const e=()=>s.jsxs("div",{children:[s.jsx("h1",{className:"text-2xl font-bold mb-4",children:"Settings"}),s.jsx("div",{className:"bg-white p-6 rounded-lg shadow-md",children:s.jsx("p",{children:"This is the settings page content."})})]});export{e as default};

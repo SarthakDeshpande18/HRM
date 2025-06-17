@@ -31,7 +31,7 @@ public class EmailService {
         helper.setFrom("sarthakdeshpande14@gmail.com");
 
         // Add the company logo as an inline image
-        helper.addInline("OtpLogo", new File("D:/HRM/src/main/resources/templates/logo/OtpLogo.png")); // path to the logo image
+        helper.addInline("OtpLogo", new File("D:/Duplicate/HRM (2)/HRM/src/main/resources/templates/logo/OtpLogo.png")); // path to the logo image
 
         mailSender.send(message);
     }

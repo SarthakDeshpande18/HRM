@@ -38,7 +38,7 @@ public class OtpService {
         otpEntry.setExpiryTime(expiryTime);
         otpRepository.save(otpEntry);
 
-        String logoPath = "D:/HRM/src/main/resources/templates/logo/OtpLogo.png"; // Set the path to your company logo
+        String logoPath = "D:/Duplicate/HRM (2)/HRM/src/main/resources/templates/logoOtpLogo.png"; // Set the path to your company logo
         emailService.sendOtpEmail(email, otp, logoPath);
     }
 
