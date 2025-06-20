@@ -71,8 +71,6 @@ public class SecurityConfig {
                                 .requestMatchers("/uploads/**").permitAll()
                                 .requestMatchers("/uploads/profile-pictures/**").permitAll()
                                 .requestMatchers("/api/calendar/**").permitAll()
-
-
                                 .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

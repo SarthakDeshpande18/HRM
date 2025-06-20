@@ -53,59 +53,61 @@ public class VideoConferencingController {
     @PostMapping("/create-room")
     public ResponseEntity<?> createRoom(@RequestParam String roomName, HttpServletRequest request) {
         Optional<Meeting> optionalMeeting = meetingRepo.findByRoomName(roomName);
-        if (optionalMeeting.isPresent()) {
-            Meeting meeting = optionalMeeting.get();
-            if (meeting.isRoomCreated()) {
-                return ResponseEntity.ok(Map.of(
-                        "roomSid", meeting.getRoomSid(),
-                        "roomName", roomName,
-                        "joinUrl", request.getRequestURL().toString().replace(request.getRequestURI(), request.getContextPath())
-                                + "/join-room?roomName=" + roomName
-                ));
-            } else {
-                Room room = Room.creator()
-                        .setUniqueName(roomName)
-                        .setType(Room.RoomType.GROUP)
-                        .create();
 
-                meeting.setRoomSid(room.getSid());
-                meeting.setRoomCreated(true);
-                meetingRepo.save(meeting);
 
-                String baseUrl = request.getRequestURL().toString().replace(request.getRequestURI(), request.getContextPath());
-                String joinUrl = baseUrl + "/join-room?roomName=" + roomName;
+        if (optionalMeeting.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("message", "Cannot create room. No scheduled meeting found with this room name."));
+        }
+        Meeting meeting = optionalMeeting.get();
 
-                return ResponseEntity.ok(Map.of(
-                        "roomSid", room.getSid(),
-                        "roomName", roomName,
-                        "joinUrl", joinUrl
-                ));
-            }
+        if (meeting.isRoomCreated()) {
+            String joinUrl = getJoinUrl(request, roomName);
+            return ResponseEntity.ok(Map.of(
+                    "roomSid", meeting.getRoomSid(),
+                    "roomName", roomName,
+                    "joinUrl", joinUrl
+            ));
         }
 
-        // fallback for instant meetings (if not scheduled)
         Room room = Room.creator()
                 .setUniqueName(roomName)
                 .setType(Room.RoomType.GROUP)
+                .setEmptyRoomTimeout(50)
                 .create();
 
-        String baseUrl = request.getRequestURL().toString().replace(request.getRequestURI(), request.getContextPath());
-        String joinUrl = baseUrl + "/join-room?roomName=" + roomName;
+        meeting.setRoomSid(room.getSid());
+        meeting.setRoomCreated(true);
+        meetingRepo.save(meeting);
 
+        String joinUrl = getJoinUrl(request, roomName);
         return ResponseEntity.ok(Map.of(
                 "roomSid", room.getSid(),
-                "roomName", room.getUniqueName(),
+                "roomName", roomName,
                 "joinUrl", joinUrl
         ));
     }
+
+    private String getJoinUrl(HttpServletRequest request, String roomName) {
+        String baseUrl = request.getRequestURL().toString().replace(request.getRequestURI(), request.getContextPath());
+        return baseUrl + "/join-room?roomName=" + roomName;
+    }
+
 
     @GetMapping("/generate-token")
     public ResponseEntity<?> generateToken(@RequestParam String identity, @RequestParam String roomName) {
         Optional<Meeting> optionalMeeting = meetingRepo.findByRoomName(roomName);
 
-        if (optionalMeeting.isPresent() && !optionalMeeting.get().isRoomCreated()) {
+        if (optionalMeeting.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("message", "Room does not exist. Please use a valid scheduled meeting link."));
+        }
+
+        Meeting meeting = optionalMeeting.get();
+
+        if (!meeting.isRoomCreated()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(Map.of("message", "Room is not active yet. Please wait for the scheduled time."));
+                    .body(Map.of("message", "Room is not active yet. Please wait for it to be created."));
         }
 
         VideoGrant grant = new VideoGrant().setRoom(roomName);
@@ -113,6 +115,8 @@ public class VideoConferencingController {
                 .identity(identity)
                 .grant(grant)
                 .build();
+
         return ResponseEntity.ok(Map.of("token", token.toJwt()));
     }
+
 }
