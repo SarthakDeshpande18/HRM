@@ -19,7 +19,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/video")
 @CrossOrigin(origins = "*")
-public class VideoConferencingController {
+public class MeetingController {
 
     @Value("${twilio.account.sid}")
     private String accountSid;

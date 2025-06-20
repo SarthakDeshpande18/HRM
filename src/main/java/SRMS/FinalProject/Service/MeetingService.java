@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
-public class RoomScheduler {
+public class MeetingService {
 
     @Autowired
     private MeetingRepository meetingRepo;

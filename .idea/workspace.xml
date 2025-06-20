@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="df4f4f32-d3da-4465-ac75-0ace7bdccd79" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Config/CorsConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/VideoConferencingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/VideoConferencingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/FinalProjectApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/FinalProjectApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/VideoConferencingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Controller/MeetingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/RoomScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SRMS/FinalProject/Service/MeetingService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
