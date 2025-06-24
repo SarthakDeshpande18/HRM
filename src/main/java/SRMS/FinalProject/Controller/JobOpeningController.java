@@ -40,8 +40,6 @@ public class JobOpeningController {
         }
     }
 
-
-
     @GetMapping("/all")
     public ResponseEntity<ApiResponse<Page<JobOpenings>>> getAllJobOpenings(
             @RequestParam(defaultValue = "0") int page,

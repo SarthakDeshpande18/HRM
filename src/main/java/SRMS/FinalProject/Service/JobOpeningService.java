@@ -28,13 +28,13 @@ public class JobOpeningService {
 
 
     public JobOpenings addJobOpening(JobOpenings jobOpening) {
-        boolean exists = jobOpeningsRepository.existsByJobDescription(jobOpening.getJobDescription());
-
-        if (exists) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Job opening already exists with the same job description");
+        // Check for duplicate job title
+        if (jobOpeningsRepository.existsByJobTitle(jobOpening.getJobTitle())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Job opening already exists with the same job title");
         }
 
-        // Fetch Technology entity by id before saving
+        // Validate Technology
         if (jobOpening.getTechnology() != null && jobOpening.getTechnology().getTech_id() != null) {
             Technology tech = technologyRepository.findById(jobOpening.getTechnology().getTech_id())
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Technology not found"));
@@ -46,8 +46,10 @@ public class JobOpeningService {
         return jobOpeningsRepository.save(jobOpening);
     }
 
+
     public JobOpenings updateJobOpening(Long id, JobOpenings updatedJobOpening) {
         return jobOpeningsRepository.findById(id).map(job -> {
+            job.setJobTitle(updatedJobOpening.getJobTitle()); // ✅ NEW
             job.setJobDescription(updatedJobOpening.getJobDescription());
             job.setYearOfExperience(updatedJobOpening.getYearOfExperience());
             job.setJobType(updatedJobOpening.getJobType());
@@ -63,7 +65,6 @@ public class JobOpeningService {
             return jobOpeningsRepository.save(job);
         }).orElseThrow(() -> new RuntimeException("Job Opening not found"));
     }
-
 
     public Page<JobOpenings> getAllJobOpenings(Pageable pageable) {
         return jobOpeningsRepository.findAll(pageable);

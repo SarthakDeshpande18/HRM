@@ -2,6 +2,7 @@ package SRMS.FinalProject.Controller;
 
 
 import SRMS.FinalProject.DTO.ApiResponse;
+import SRMS.FinalProject.DTO.JobApplicationFilterRequest;
 import SRMS.FinalProject.DTO.JobApplicationResponse;
 import SRMS.FinalProject.Service.CustomUserDetails;
 import SRMS.FinalProject.Service.EmailService;
@@ -26,6 +27,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -34,7 +37,7 @@ public class JobApplicationController {
 
     private final JobApplicationService service;
     private final EmailService emailService;
-    private static final String UPLOAD_DIR = "E:/HRM/uploads/";
+    private static final String UPLOAD_DIR = "D:/HRM/uploads/";
 
     @Autowired
     public JobApplicationController(JobApplicationService service, EmailService emailService) {
@@ -46,6 +49,7 @@ public class JobApplicationController {
     @PostMapping("/submit")
     public ResponseEntity<ApiResponse<JobApplicationResponse>> submitApplication(
             @RequestParam("file") MultipartFile file,
+            @RequestParam("jobId") Long jobId,
             Authentication authentication) {
 
         try {
@@ -54,21 +58,20 @@ public class JobApplicationController {
 
             boolean hasUserRole = userDetails.getAuthorities().stream()
                     .anyMatch(auth -> auth.getAuthority().equals("USER"));
-
             if (!hasUserRole) {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                        .body(new ApiResponse<>(403, "Id "+ userId + "  " +"Role "+ userDetails.getAuthorities()+ "  " +" You do not have the 'USER' role to submit an application.", null));
+                        .body(new ApiResponse<>(403,
+                                "User ID " + userId + " with roles " + userDetails.getAuthorities()
+                                        + " does not have the 'USER' role.",
+                                null));
             }
-            System.out.println("Authenticated User ID: " + userId);
-            System.out.println("Authorities: " + userDetails.getAuthorities());
 
             if (!file.getOriginalFilename().toLowerCase().endsWith(".pdf")) {
                 return ResponseEntity.badRequest()
                         .body(new ApiResponse<>(400, "Only PDF files are allowed!", null));
             }
 
-            JobApplicationResponse savedApplication = service.submitApplication(file, userId);
-
+            JobApplicationResponse savedApplication = service.submitApplication(file, userId, jobId);
             return ResponseEntity.ok(new ApiResponse<>(200,
                     "Application submitted successfully!", savedApplication));
 
@@ -81,13 +84,33 @@ public class JobApplicationController {
         }
     }
 
-    @GetMapping("/all")
+    @PostMapping("/all")
     public ResponseEntity<ApiResponse<Page<JobApplication>>> getAllApplications(
-            @RequestParam(defaultValue = "0") int page, // Default is page 0
-            @RequestParam(defaultValue = "10") int size) { // Default size is 10
+            @RequestBody JobApplicationFilterRequest request,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
         try {
-            Page<JobApplication> applications = service.getAllApplications(page, size);
+            List<String> filters = request.getFilters();
+
+
+            if (filters == null || filters.isEmpty()) {
+                filters = Collections.singletonList("all");
+            } else {
+
+                List<String> validValues = Arrays.asList("all", "pending", "reviewed", "accepted", "rejected");
+                for (String filter : filters) {
+                    if (!validValues.contains(filter.toLowerCase())) {
+                        return ResponseEntity.badRequest()
+                                .body(new ApiResponse<>(400, "Invalid filter value: " + filter, null));
+                    }
+                }
+            }
+
+
+            Page<JobApplication> applications = service.getAllApplicationsByStatus(filters, page, size);
             return ResponseEntity.ok(new ApiResponse<>(200, "Applications fetched successfully!", applications));
+
         } catch (Exception e) {
             return ResponseEntity.internalServerError()
                     .body(new ApiResponse<>(500, "Error: " + e.getMessage(), null));

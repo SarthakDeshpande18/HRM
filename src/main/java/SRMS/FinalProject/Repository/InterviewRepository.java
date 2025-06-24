@@ -1,5 +1,5 @@
 package SRMS.FinalProject.Repository;
-import SRMS.FinalProject.UserEntity.InterviewEntity;
+import  SRMS.FinalProject.UserEntity.InterviewEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

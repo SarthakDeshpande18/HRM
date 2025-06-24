@@ -10,6 +10,8 @@ public interface JobOpeningRepository extends JpaRepository<JobOpenings, Long> {
 
     boolean existsByJobDescription(String jobDescription);
 
+    boolean existsByJobTitle(String jobTitle);
+
     boolean existsByJobType(String jobType);
 
     boolean existsByJobDescriptionAndYearOfExperienceAndJobType(
